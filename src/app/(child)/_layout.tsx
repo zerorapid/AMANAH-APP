@@ -1,5 +1,5 @@
 import { Tabs } from 'expo-router'
-import { Wallet, QrCode, Activity, Menu } from '@tamagui/lucide-icons'
+import { Wallet, QrCode, Activity, Menu } from 'lucide-react-native'
 import { C } from '../../constants/theme'
 
 export default function ChildLayout() {

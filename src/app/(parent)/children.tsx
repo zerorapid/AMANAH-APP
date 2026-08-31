@@ -1,6 +1,6 @@
 import { ScrollView, StyleSheet, View, TouchableOpacity } from 'react-native'
 import { YStack, XStack, Paragraph, Button, Avatar } from 'tamagui'
-import { Plus, ChevronRight } from '@tamagui/lucide-icons'
+import { Plus, ChevronRight } from 'lucide-react-native'
 import { SafeAreaView } from 'react-native-safe-area-context'
 import { C } from '../../constants/theme'
 import { useParentStore } from '../../store/parentStore'

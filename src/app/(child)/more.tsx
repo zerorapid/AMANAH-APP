@@ -1,6 +1,6 @@
 import { ScrollView, StyleSheet, TouchableOpacity, View } from 'react-native'
 import { YStack, XStack, Paragraph, Button, Avatar } from 'tamagui'
-import { Bell, ShieldAlert, LogOut, User, ChevronRight } from '@tamagui/lucide-icons'
+import { Bell, ShieldAlert, LogOut, User, ChevronRight } from 'lucide-react-native'
 import { SafeAreaView } from 'react-native-safe-area-context'
 import { useRouter } from 'expo-router'
 import { C } from '../../constants/theme'

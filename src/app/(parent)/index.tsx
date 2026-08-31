@@ -1,6 +1,6 @@
 import { ScrollView, StyleSheet, View } from 'react-native'
 import { YStack, XStack, Paragraph, Button, Card, Avatar, Progress } from 'tamagui'
-import { Bell, Plus, Send, ArrowDownCircle, Clock } from '@tamagui/lucide-icons'
+import { Bell, Plus, Send, ArrowDownCircle, Clock } from 'lucide-react-native'
 import { SafeAreaView } from 'react-native-safe-area-context'
 import { C } from '../../constants/theme'
 import { useParentStore } from '../../store/parentStore'

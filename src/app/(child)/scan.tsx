@@ -1,6 +1,6 @@
 import { StyleSheet, View } from 'react-native'
 import { YStack, XStack, Paragraph, Button } from 'tamagui'
-import { QrCode, CheckCircle, XCircle, AlertCircle } from '@tamagui/lucide-icons'
+import { QrCode, CheckCircle, XCircle, AlertCircle } from 'lucide-react-native'
 import { SafeAreaView } from 'react-native-safe-area-context'
 import { useState } from 'react'
 import { C } from '../../constants/theme'

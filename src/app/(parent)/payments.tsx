@@ -1,6 +1,6 @@
 import { ScrollView, StyleSheet, TouchableOpacity } from 'react-native'
 import { YStack, XStack, Paragraph } from 'tamagui'
-import { QrCode, ArrowRightLeft, CreditCard, ChevronRight } from '@tamagui/lucide-icons'
+import { QrCode, ArrowRightLeft, CreditCard, ChevronRight } from 'lucide-react-native'
 import { SafeAreaView } from 'react-native-safe-area-context'
 import { C } from '../../constants/theme'
 

@@ -2,7 +2,7 @@ import { StyleSheet } from 'react-native'
 import { YStack, XStack, Paragraph, Button, Input } from 'tamagui'
 import { useRouter } from 'expo-router'
 import { SafeAreaView } from 'react-native-safe-area-context'
-import { Shield } from '@tamagui/lucide-icons'
+import { Shield } from 'lucide-react-native'
 import { C } from '../../../constants/theme'
 
 export default function ParentSecurity() {

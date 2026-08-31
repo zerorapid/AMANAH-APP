@@ -1,5 +1,5 @@
 import { Tabs } from 'expo-router'
-import { Home, Users, CreditCard, Activity, Settings } from '@tamagui/lucide-icons'
+import { Home, Users, CreditCard, Activity, Settings } from 'lucide-react-native'
 import { C } from '../../constants/theme'
 
 export default function ParentLayout() {

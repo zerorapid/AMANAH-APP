@@ -1,6 +1,6 @@
 import { ScrollView, StyleSheet, View } from 'react-native'
 import { YStack, XStack, Paragraph, Button, Avatar } from 'tamagui'
-import { Bell, QrCode, Send } from '@tamagui/lucide-icons'
+import { Bell, QrCode, Send } from 'lucide-react-native'
 import { SafeAreaView } from 'react-native-safe-area-context'
 import { useRouter } from 'expo-router'
 import { C } from '../../constants/theme'
