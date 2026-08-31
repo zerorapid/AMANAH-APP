@@ -71,7 +71,7 @@ export default function ChildWalletHome() {
                 </Paragraph>
               </XStack>
               <View style={s.progressBarBg}>
-                <View style={[s.progressBarFill, { width: `${pct} SAR%`, backgroundColor: pct > 85 ? C.error : C.primary }]} />
+                <View style={[s.progressBarFill, { width: `${pct}%`, backgroundColor: pct > 85 ? C.error : C.primary }]} />
               </View>
             </YStack>
             <View style={{ height: 1, backgroundColor: C.border }} />

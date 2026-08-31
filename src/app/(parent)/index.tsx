@@ -6,7 +6,7 @@ import { C } from '../../constants/theme'
 import { useParentStore } from '../../store/parentStore'
 
 import { ShoppingCart, Wallet, Gamepad2, HelpCircle } from "lucide-react-native";
-const getIcon = (name: string) => {
+const getIcon = (name?: string) => {
   switch(name) {
     case "ShoppingCart": return <ShoppingCart size={22} color={C.text} />;
     case "Wallet": return <Wallet size={22} color={C.text} />;
