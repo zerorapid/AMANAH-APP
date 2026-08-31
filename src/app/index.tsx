@@ -1,98 +1,89 @@
-import * as Device from 'expo-device';
-import { Platform, StyleSheet } from 'react-native';
-import { SafeAreaView } from 'react-native-safe-area-context';
+import { View, StyleSheet } from 'react-native'
+import { YStack, XStack, H1, H2, Paragraph, Button, Card } from 'tamagui'
+import { useRouter } from 'expo-router'
+import { SafeAreaView } from 'react-native-safe-area-context'
+import { Shield, User } from '@tamagui/lucide-icons'
+import { COLORS } from '../constants/theme'
 
-import { AnimatedIcon } from '@/components/animated-icon';
-import { HintRow } from '@/components/hint-row';
-import { ThemedText } from '@/components/themed-text';
-import { ThemedView } from '@/components/themed-view';
-import { WebBadge } from '@/components/web-badge';
-import { BottomTabInset, MaxContentWidth, Spacing } from '@/constants/theme';
+export default function RoleSelector() {
+  const router = useRouter()
 
-function getDevMenuHint() {
-  if (Platform.OS === 'web') {
-    return <ThemedText type="small">use browser devtools</ThemedText>;
-  }
-  if (Device.isDevice) {
-    return (
-      <ThemedText type="small">
-        shake device or press <ThemedText type="code">m</ThemedText> in terminal
-      </ThemedText>
-    );
-  }
-  const shortcut = Platform.OS === 'android' ? 'cmd+m (or ctrl+m)' : 'cmd+d';
   return (
-    <ThemedText type="small">
-      press <ThemedText type="code">{shortcut}</ThemedText>
-    </ThemedText>
-  );
-}
+    <SafeAreaView style={styles.container}>
+      <YStack flex={1} padding="$5" justifyContent="space-between">
+        {/* Logo & Tagline */}
+        <YStack alignItems="center" marginTop="$8" gap="$2">
+          <YStack
+            backgroundColor={COLORS.primary}
+            width={72} height={72}
+            borderRadius={20}
+            justifyContent="center"
+            alignItems="center"
+          >
+            <H2 color="white" fontSize={30}>A</H2>
+          </YStack>
+          <H1 color={COLORS.primary} marginTop="$3">Amanah</H1>
+          <Paragraph color={COLORS.textMuted} textAlign="center" size="$4">
+            Smart family finance — built on trust.
+          </Paragraph>
+        </YStack>
 
-export default function HomeScreen() {
-  return (
-    <ThemedView style={styles.container}>
-      <SafeAreaView style={styles.safeArea}>
-        <ThemedView style={styles.heroSection}>
-          <AnimatedIcon />
-          <ThemedText type="title" style={styles.title}>
-            Welcome to&nbsp;Expo
-          </ThemedText>
-        </ThemedView>
+        {/* Role Cards */}
+        <YStack gap="$4">
+          <Card
+            borderColor={COLORS.primary}
+            borderWidth={2}
+            borderRadius={16}
+            padding="$5"
+            backgroundColor="white"
+            pressStyle={{ opacity: 0.85 }}
+            onPress={() => router.push('/(auth)/parent/welcome')}
+          >
+            <XStack gap="$4" alignItems="center">
+              <YStack backgroundColor={COLORS.primaryLight} padding="$3" borderRadius={12}>
+                <Shield color={COLORS.primary} size={28} />
+              </YStack>
+              <YStack flex={1}>
+                <Paragraph fontWeight="bold" fontSize={17} color={COLORS.text}>Parent</Paragraph>
+                <Paragraph color={COLORS.textMuted} size="$3">
+                  Control allowances, limits & approvals
+                </Paragraph>
+              </YStack>
+            </XStack>
+          </Card>
 
-        <ThemedText type="code" style={styles.code}>
-          get started
-        </ThemedText>
+          <Card
+            borderColor={COLORS.border}
+            borderWidth={1.5}
+            borderRadius={16}
+            padding="$5"
+            backgroundColor="white"
+            pressStyle={{ opacity: 0.85 }}
+            onPress={() => router.push('/(auth)/child/welcome')}
+          >
+            <XStack gap="$4" alignItems="center">
+              <YStack backgroundColor={COLORS.primaryLight} padding="$3" borderRadius={12}>
+                <User color={COLORS.primary} size={28} />
+              </YStack>
+              <YStack flex={1}>
+                <Paragraph fontWeight="bold" fontSize={17} color={COLORS.text}>Child</Paragraph>
+                <Paragraph color={COLORS.textMuted} size="$3">
+                  Spend, request & track your money
+                </Paragraph>
+              </YStack>
+            </XStack>
+          </Card>
+        </YStack>
 
-        <ThemedView type="backgroundElement" style={styles.stepContainer}>
-          <HintRow
-            title="Try editing"
-            hint={<ThemedText type="code">src/app/index.tsx</ThemedText>}
-          />
-          <HintRow title="Dev tools" hint={getDevMenuHint()} />
-          <HintRow
-            title="Fresh start"
-            hint={<ThemedText type="code">npm run reset-project</ThemedText>}
-          />
-        </ThemedView>
-
-        {Platform.OS === 'web' && <WebBadge />}
-      </SafeAreaView>
-    </ThemedView>
-  );
+        {/* Footer note */}
+        <Paragraph color={COLORS.textMuted} textAlign="center" size="$2" marginBottom="$2">
+          Light mode · White & Orange · v1.0
+        </Paragraph>
+      </YStack>
+    </SafeAreaView>
+  )
 }
 
 const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    justifyContent: 'center',
-    flexDirection: 'row',
-  },
-  safeArea: {
-    flex: 1,
-    paddingHorizontal: Spacing.four,
-    alignItems: 'center',
-    gap: Spacing.three,
-    paddingBottom: BottomTabInset + Spacing.three,
-    maxWidth: MaxContentWidth,
-  },
-  heroSection: {
-    alignItems: 'center',
-    justifyContent: 'center',
-    flex: 1,
-    paddingHorizontal: Spacing.four,
-    gap: Spacing.four,
-  },
-  title: {
-    textAlign: 'center',
-  },
-  code: {
-    textTransform: 'uppercase',
-  },
-  stepContainer: {
-    gap: Spacing.three,
-    alignSelf: 'stretch',
-    paddingHorizontal: Spacing.three,
-    paddingVertical: Spacing.four,
-    borderRadius: Spacing.four,
-  },
-});
+  container: { flex: 1, backgroundColor: '#FFFFFF' },
+})

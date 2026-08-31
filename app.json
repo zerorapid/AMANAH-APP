@@ -37,6 +37,13 @@
     "experiments": {
       "typedRoutes": true,
       "reactCompiler": true
-    }
+    },
+    "extra": {
+      "router": {},
+      "eas": {
+        "projectId": "a80b34b0-02b2-49f2-9fe0-2a920bebe979"
+      }
+    },
+    "owner": "zerorapids-organization"
   }
 }
