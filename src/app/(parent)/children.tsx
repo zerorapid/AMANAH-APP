@@ -17,7 +17,7 @@ export default function ParentChildren() {
       <ScrollView contentContainerStyle={s.scroll} showsVerticalScrollIndicator={false}>
         <XStack justifyContent="space-between" alignItems="center" marginBottom={16}>
           <Paragraph fontSize={20} fontWeight="bold" color={C.text}>Manage Children</Paragraph>
-          <Button onPress={() => alert("This feature is scheduled for backend integration in the next phase.")} size="$3" icon={<Plus size={14} />} backgroundColor={C.primary} color="white" borderRadius={10}>
+          <Button onPress={() => setOpen(true)} size="$3" icon={<Plus size={14} />} backgroundColor={C.primary} color="white" borderRadius={10}>
             Add Child
           </Button>
         </XStack>
@@ -58,7 +58,7 @@ export default function ParentChildren() {
               <Paragraph fontSize={15} fontWeight="bold" color={C.text}>Leo</Paragraph>
               <Paragraph fontSize={13} color={C.muted}>Invitation sent · Code: XYZ-789</Paragraph>
             </YStack>
-            <Button onPress={() => alert("This feature is scheduled for backend integration in the next phase.")} size="$2" backgroundColor={C.primaryLight} color={C.primary}>Resend</Button>
+            <Button onPress={() => setOpen(true)} size="$2" backgroundColor={C.primaryLight} color={C.primary}>Resend</Button>
           </XStack>
         </View>
 
