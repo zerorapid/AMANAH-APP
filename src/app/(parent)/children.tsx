@@ -1,68 +1,76 @@
-import { ScrollView } from 'react-native'
-import { YStack, XStack, H4, Paragraph, Button, Card, Avatar, Separator } from 'tamagui'
-import { Plus, ChevronRight, Settings } from '@tamagui/lucide-icons'
+import { ScrollView, StyleSheet, View, TouchableOpacity } from 'react-native'
+import { YStack, XStack, Paragraph, Button, Avatar } from 'tamagui'
+import { Plus, ChevronRight } from '@tamagui/lucide-icons'
 import { SafeAreaView } from 'react-native-safe-area-context'
+import { C } from '../../constants/theme'
+import { useParentStore } from '../../store/parentStore'
 
 export default function ParentChildren() {
+  const { children } = useParentStore()
+
   return (
-    <SafeAreaView style={{ flex: 1, backgroundColor: '#ffffff' }} edges={['top']}>
-      <ScrollView contentContainerStyle={{ padding: 16 }}>
-        <XStack justifyContent="space-between" alignItems="center" marginBottom="$4">
-          <H4 color="$color9">Manage Children</H4>
-          <Button size="$3" icon={<Plus size={16} />} backgroundColor="$color9" color="white">Add Child</Button>
+    <SafeAreaView style={s.container} edges={['top']}>
+      <ScrollView contentContainerStyle={s.scroll} showsVerticalScrollIndicator={false}>
+        <XStack justifyContent="space-between" alignItems="center" marginBottom={16}>
+          <Paragraph fontSize={20} fontWeight="bold" color={C.text}>Manage Children</Paragraph>
+          <Button size="$3" icon={<Plus size={14} />} backgroundColor={C.orange} color="white" borderRadius={10}>
+            Add Child
+          </Button>
         </XStack>
 
-        <YStack gap="$4" marginBottom="$6">
-          <Paragraph color="$color" size="$3" fontWeight="bold">Active</Paragraph>
-          
-          <Card size="$3" borderColor="$borderColor" padding="$3" borderRadius="$4">
-            <XStack gap="$3" alignItems="center" justifyContent="space-between">
-              <XStack gap="$3" alignItems="center">
-                <Avatar circular size="$4">
-                  <Avatar.Image src="https://i.pravatar.cc/150?u=child1" />
-                  <Avatar.Fallback backgroundColor="$color5" />
+        <Paragraph fontSize={13} fontWeight="600" color={C.muted} marginBottom={10}>
+          ACTIVE ({children.length})
+        </Paragraph>
+        <YStack gap={10} marginBottom={24}>
+          {children.map((child) => (
+            <TouchableOpacity key={child.id} style={s.card} activeOpacity={0.7}>
+              <XStack gap={12} alignItems="center">
+                <Avatar circular size="$5">
+                  <Avatar.Image src={child.avatar} />
+                  <Avatar.Fallback backgroundColor={C.orangeLight} />
                 </Avatar>
-                <YStack>
-                  <Paragraph fontWeight="bold" color="$color9">Alex</Paragraph>
-                  <Paragraph size="$2" color="$color">Monthly Limit: $150.00</Paragraph>
+                <YStack flex={1}>
+                  <Paragraph fontSize={16} fontWeight="bold" color={C.orange}>{child.name}</Paragraph>
+                  <Paragraph fontSize={13} color={C.muted}>Monthly limit: ${child.monthlyLimit}</Paragraph>
+                  <Paragraph fontSize={12} color={child.paymentMode === 'auto' ? C.success : C.warning}>
+                    {child.paymentMode === 'auto' ? '✓ Auto-Approved' : '⚡ Approval Required'}
+                  </Paragraph>
+                </YStack>
+                <YStack alignItems="flex-end" gap={4}>
+                  <Paragraph fontSize={16} fontWeight="bold" color={C.text}>${child.balance}</Paragraph>
+                  <ChevronRight size={18} color={C.muted} />
                 </YStack>
               </XStack>
-              <ChevronRight size={20} color="$color" />
-            </XStack>
-          </Card>
-
-          <Card size="$3" borderColor="$borderColor" padding="$3" borderRadius="$4">
-            <XStack gap="$3" alignItems="center" justifyContent="space-between">
-              <XStack gap="$3" alignItems="center">
-                <Avatar circular size="$4">
-                  <Avatar.Image src="https://i.pravatar.cc/150?u=child2" />
-                  <Avatar.Fallback backgroundColor="$color5" />
-                </Avatar>
-                <YStack>
-                  <Paragraph fontWeight="bold" color="$color9">Sarah</Paragraph>
-                  <Paragraph size="$2" color="$color">Monthly Limit: $100.00</Paragraph>
-                </YStack>
-              </XStack>
-              <ChevronRight size={20} color="$color" />
-            </XStack>
-          </Card>
+            </TouchableOpacity>
+          ))}
         </YStack>
 
-        <Separator borderColor="$borderColor" marginBottom="$6" />
+        <Paragraph fontSize={13} fontWeight="600" color={C.muted} marginBottom={10}>
+          PENDING INVITATIONS
+        </Paragraph>
+        <View style={[s.card, { backgroundColor: C.bg }]}>
+          <XStack justifyContent="space-between" alignItems="center">
+            <YStack>
+              <Paragraph fontSize={15} fontWeight="bold" color={C.text}>Leo</Paragraph>
+              <Paragraph fontSize={13} color={C.muted}>Invitation sent · Code: XYZ-789</Paragraph>
+            </YStack>
+            <Button size="$2" backgroundColor={C.orangeLight} color={C.orange}>Resend</Button>
+          </XStack>
+        </View>
 
-        <YStack gap="$4">
-          <Paragraph color="$color" size="$3" fontWeight="bold">Pending Invitations</Paragraph>
-          <Card size="$3" borderColor="$borderColor" padding="$3" borderRadius="$4" backgroundColor="$color2">
-            <XStack gap="$3" alignItems="center" justifyContent="space-between">
-              <YStack>
-                <Paragraph fontWeight="bold" color="$color">Leo (Invitation Sent)</Paragraph>
-                <Paragraph size="$2" color="$color" opacity={0.7}>Code: XYZ-789</Paragraph>
-              </YStack>
-              <Button size="$2" variant="outlined" borderColor="$color" color="$color">Resend</Button>
-            </XStack>
-          </Card>
-        </YStack>
+        <TouchableOpacity style={s.addCard} activeOpacity={0.7}>
+          <Plus size={20} color={C.orange} />
+          <Paragraph fontSize={15} color={C.orange} fontWeight="600">Invite Another Child</Paragraph>
+        </TouchableOpacity>
       </ScrollView>
     </SafeAreaView>
   )
 }
+
+const s = StyleSheet.create({
+  container: { flex: 1, backgroundColor: C.white },
+  scroll: { padding: 16, paddingBottom: 40 },
+  card: { backgroundColor: C.white, borderRadius: 14, borderWidth: 1, borderColor: C.border, padding: 14, marginBottom: 0 },
+  addCard: { borderRadius: 14, borderWidth: 1.5, borderColor: C.orange, borderStyle: 'dashed',
+    padding: 16, alignItems: 'center', flexDirection: 'row', gap: 10, justifyContent: 'center', marginTop: 12 },
+})

@@ -1,39 +1,72 @@
-import { ScrollView } from 'react-native'
-import { YStack, XStack, H4, Paragraph, Card, Separator } from 'tamagui'
+import { ScrollView, StyleSheet, View } from 'react-native'
+import { YStack, XStack, Paragraph } from 'tamagui'
 import { SafeAreaView } from 'react-native-safe-area-context'
+import { C } from '../../constants/theme'
+import { useParentStore } from '../../store/parentStore'
 
 export default function ParentTransactions() {
-  const transactions = [
-    { id: 1, merchant: 'Amazon', amount: '-$12.50', child: 'Alex', date: 'Today, 10:42 AM', status: 'Completed' },
-    { id: 2, merchant: 'PlayStation', amount: '-$5.00', child: 'Sarah', date: 'Yesterday', status: 'Completed' },
-    { id: 3, merchant: 'Steam Games', amount: '-$20.00', child: 'Alex', date: 'Aug 24', status: 'Blocked' },
-    { id: 4, merchant: 'Allowance', amount: '+$50.00', child: 'Alex', date: 'Aug 20', status: 'Completed' },
-  ]
+  const { transactions } = useParentStore()
 
   return (
-    <SafeAreaView style={{ flex: 1, backgroundColor: '#ffffff' }} edges={['top']}>
-      <ScrollView contentContainerStyle={{ padding: 16 }}>
-        <H4 color="$color9" marginBottom="$4">Recent Transactions</H4>
-        
-        <YStack gap="$3">
+    <SafeAreaView style={s.container} edges={['top']}>
+      <ScrollView contentContainerStyle={s.scroll} showsVerticalScrollIndicator={false}>
+        <Paragraph fontSize={20} fontWeight="bold" color={C.text} marginBottom={16}>
+          All Transactions
+        </Paragraph>
+
+        {/* Filter tabs */}
+        <XStack gap={8} marginBottom={16}>
+          {['All', 'Completed', 'Blocked'].map((tab) => (
+            <View key={tab} style={[s.tab, tab === 'All' && s.tabActive]}>
+              <Paragraph fontSize={13} fontWeight="600" color={tab === 'All' ? C.white : C.muted}>{tab}</Paragraph>
+            </View>
+          ))}
+        </XStack>
+
+        <YStack gap={8}>
           {transactions.map((tx) => (
-            <Card key={tx.id} borderColor="$borderColor" padding="$3" borderRadius="$4">
+            <View key={tx.id} style={s.card}>
               <XStack justifyContent="space-between" alignItems="center">
-                <YStack>
-                  <Paragraph fontWeight="bold" color="$color9">{tx.merchant}</Paragraph>
-                  <Paragraph size="$2" color="$color">{tx.child} • {tx.date}</Paragraph>
-                  {tx.status === 'Blocked' && (
-                    <Paragraph size="$2" color="red" fontWeight="bold">Blocked</Paragraph>
-                  )}
+                <XStack gap={12} alignItems="center" flex={1}>
+                  <Paragraph fontSize={24}>{tx.icon}</Paragraph>
+                  <YStack flex={1}>
+                    <Paragraph fontSize={15} fontWeight="bold" color={C.text}>{tx.merchant}</Paragraph>
+                    <Paragraph fontSize={12} color={C.muted}>
+                      {tx.childId ? (tx.childId === 'c1' ? 'Alex' : 'Sarah') : 'Parent'} · {tx.date}
+                    </Paragraph>
+                  </YStack>
+                </XStack>
+                <YStack alignItems="flex-end">
+                  <Paragraph fontSize={15} fontWeight="bold"
+                    color={tx.amount > 0 ? C.success : C.text}>
+                    {tx.amount > 0 ? '+' : ''}${Math.abs(tx.amount).toFixed(2)}
+                  </Paragraph>
+                  <View style={[s.badge,
+                    tx.status === 'blocked' ? s.badgeRed :
+                    tx.status === 'completed' ? s.badgeGreen : s.badgeGray]}>
+                    <Paragraph fontSize={10} fontWeight="bold"
+                      color={tx.status === 'blocked' ? C.error : tx.status === 'completed' ? C.success : C.muted}>
+                      {tx.status.toUpperCase()}
+                    </Paragraph>
+                  </View>
                 </YStack>
-                <Paragraph fontWeight="bold" color={tx.amount.startsWith('+') ? 'green' : '$color9'}>
-                  {tx.amount}
-                </Paragraph>
               </XStack>
-            </Card>
+            </View>
           ))}
         </YStack>
       </ScrollView>
     </SafeAreaView>
   )
 }
+
+const s = StyleSheet.create({
+  container: { flex: 1, backgroundColor: C.white },
+  scroll: { padding: 16, paddingBottom: 40 },
+  tab: { paddingHorizontal: 14, paddingVertical: 6, borderRadius: 20, backgroundColor: C.bg },
+  tabActive: { backgroundColor: C.orange },
+  card: { backgroundColor: C.white, borderRadius: 12, borderWidth: 1, borderColor: C.border, padding: 12 },
+  badge: { paddingHorizontal: 6, paddingVertical: 2, borderRadius: 6, marginTop: 2 },
+  badgeRed: { backgroundColor: C.errorBg },
+  badgeGreen: { backgroundColor: C.successBg },
+  badgeGray: { backgroundColor: C.bg },
+})

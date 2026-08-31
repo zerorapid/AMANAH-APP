@@ -1,89 +1,91 @@
-import { View, StyleSheet } from 'react-native'
-import { YStack, XStack, H1, H2, Paragraph, Button, Card } from 'tamagui'
+import { StyleSheet } from 'react-native'
+import { YStack, XStack, H1, Paragraph, Card } from 'tamagui'
 import { useRouter } from 'expo-router'
 import { SafeAreaView } from 'react-native-safe-area-context'
 import { Shield, User } from '@tamagui/lucide-icons'
-import { COLORS } from '../constants/theme'
+import { C } from '../constants/theme'
 
 export default function RoleSelector() {
   const router = useRouter()
 
   return (
-    <SafeAreaView style={styles.container}>
-      <YStack flex={1} padding="$5" justifyContent="space-between">
-        {/* Logo & Tagline */}
-        <YStack alignItems="center" marginTop="$8" gap="$2">
-          <YStack
-            backgroundColor={COLORS.primary}
-            width={72} height={72}
-            borderRadius={20}
-            justifyContent="center"
-            alignItems="center"
-          >
-            <H2 color="white" fontSize={30}>A</H2>
+    <SafeAreaView style={s.container}>
+      <YStack flex={1} paddingHorizontal={24} justifyContent="space-between" paddingVertical={40}>
+
+        {/* Logo */}
+        <YStack alignItems="center" gap={12}>
+          <YStack width={72} height={72} borderRadius={20} backgroundColor={C.orange}
+            justifyContent="center" alignItems="center">
+            <Paragraph fontSize={32} color="white" fontWeight="bold">A</Paragraph>
           </YStack>
-          <H1 color={COLORS.primary} marginTop="$3">Amanah</H1>
-          <Paragraph color={COLORS.textMuted} textAlign="center" size="$4">
+          <H1 color={C.orange} marginTop={8}>Amanah</H1>
+          <Paragraph color={C.muted} textAlign="center" fontSize={15}>
             Smart family finance — built on trust.
           </Paragraph>
         </YStack>
 
         {/* Role Cards */}
-        <YStack gap="$4">
+        <YStack gap={16}>
+          <Paragraph color={C.muted} textAlign="center" fontSize={13} marginBottom={4}>
+            Choose your role to continue
+          </Paragraph>
+
           <Card
-            borderColor={COLORS.primary}
-            borderWidth={2}
-            borderRadius={16}
-            padding="$5"
-            backgroundColor="white"
-            pressStyle={{ opacity: 0.85 }}
             onPress={() => router.push('/(auth)/parent/welcome')}
+            pressStyle={{ opacity: 0.8, scale: 0.98 }}
+            backgroundColor={C.white}
+            borderRadius={16}
+            borderWidth={2}
+            borderColor={C.orange}
+            padding={20}
           >
-            <XStack gap="$4" alignItems="center">
-              <YStack backgroundColor={COLORS.primaryLight} padding="$3" borderRadius={12}>
-                <Shield color={COLORS.primary} size={28} />
+            <XStack gap={16} alignItems="center">
+              <YStack backgroundColor={C.orangeLight} padding={12} borderRadius={12}>
+                <Shield color={C.orange} size={26} />
               </YStack>
               <YStack flex={1}>
-                <Paragraph fontWeight="bold" fontSize={17} color={COLORS.text}>Parent</Paragraph>
-                <Paragraph color={COLORS.textMuted} size="$3">
+                <Paragraph fontWeight="bold" fontSize={17} color={C.text}>Parent</Paragraph>
+                <Paragraph color={C.muted} fontSize={13}>
                   Control allowances, limits & approvals
                 </Paragraph>
               </YStack>
+              <Paragraph color={C.orange} fontSize={20}>›</Paragraph>
             </XStack>
           </Card>
 
           <Card
-            borderColor={COLORS.border}
-            borderWidth={1.5}
-            borderRadius={16}
-            padding="$5"
-            backgroundColor="white"
-            pressStyle={{ opacity: 0.85 }}
             onPress={() => router.push('/(auth)/child/welcome')}
+            pressStyle={{ opacity: 0.8, scale: 0.98 }}
+            backgroundColor={C.white}
+            borderRadius={16}
+            borderWidth={1.5}
+            borderColor={C.border}
+            padding={20}
           >
-            <XStack gap="$4" alignItems="center">
-              <YStack backgroundColor={COLORS.primaryLight} padding="$3" borderRadius={12}>
-                <User color={COLORS.primary} size={28} />
+            <XStack gap={16} alignItems="center">
+              <YStack backgroundColor={C.orangeLight} padding={12} borderRadius={12}>
+                <User color={C.orange} size={26} />
               </YStack>
               <YStack flex={1}>
-                <Paragraph fontWeight="bold" fontSize={17} color={COLORS.text}>Child</Paragraph>
-                <Paragraph color={COLORS.textMuted} size="$3">
+                <Paragraph fontWeight="bold" fontSize={17} color={C.text}>Child</Paragraph>
+                <Paragraph color={C.muted} fontSize={13}>
                   Spend, request & track your money
                 </Paragraph>
               </YStack>
+              <Paragraph color={C.muted} fontSize={20}>›</Paragraph>
             </XStack>
           </Card>
         </YStack>
 
-        {/* Footer note */}
-        <Paragraph color={COLORS.textMuted} textAlign="center" size="$2" marginBottom="$2">
-          Light mode · White & Orange · v1.0
+        {/* Footer */}
+        <Paragraph color={C.muted} textAlign="center" fontSize={12}>
+          Amanah App · Light Mode · v1.0
         </Paragraph>
       </YStack>
     </SafeAreaView>
   )
 }
 
-const styles = StyleSheet.create({
-  container: { flex: 1, backgroundColor: '#FFFFFF' },
+const s = StyleSheet.create({
+  container: { flex: 1, backgroundColor: C.white },
 })

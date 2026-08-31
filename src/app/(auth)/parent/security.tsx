@@ -1,25 +1,63 @@
-import { YStack, H2, Paragraph, Button, Input, Label } from 'tamagui'
+import { StyleSheet } from 'react-native'
+import { YStack, XStack, Paragraph, Button, Input } from 'tamagui'
 import { useRouter } from 'expo-router'
 import { SafeAreaView } from 'react-native-safe-area-context'
+import { Shield } from '@tamagui/lucide-icons'
+import { C } from '../../../constants/theme'
 
 export default function ParentSecurity() {
   const router = useRouter()
-
   return (
-    <SafeAreaView style={{ flex: 1, backgroundColor: '#ffffff' }}>
-      <YStack flex={1} padding="$4" gap="$4" justifyContent="center">
-        <H2 color="$color9">Security Setup</H2>
-        <Paragraph color="$color" marginBottom="$4">Create an App PIN to secure your account.</Paragraph>
-        
-        <YStack gap="$2">
-          <Label htmlFor="pin">4-Digit PIN</Label>
-          <Input id="pin" keyboardType="numeric" secureTextEntry maxLength={4} placeholder="****" size="$4" textAlign="center" letterSpacing={10} />
+    <SafeAreaView style={s.container}>
+      <YStack flex={1} paddingHorizontal={24} paddingTop={48} gap={20}>
+        <Paragraph fontSize={26} fontWeight="bold" color={C.text}>Security Setup</Paragraph>
+        <Paragraph color={C.muted} fontSize={14}>Create a PIN to protect your account.</Paragraph>
+
+        <YStack backgroundColor={C.orangeLight} borderRadius={16} padding={20} alignItems="center" gap={8}>
+          <Shield color={C.orange} size={36} />
+          <Paragraph color={C.orange} fontWeight="bold" fontSize={15}>Enter 4-Digit PIN</Paragraph>
         </YStack>
 
-        <Button backgroundColor="$color9" color="white" size="$5" onPress={() => router.push('/(parent)')} marginTop="$4">
-          Complete Setup
+        <Input
+          keyboardType="numeric"
+          secureTextEntry
+          maxLength={4}
+          placeholder="• • • •"
+          size="$6"
+          borderRadius={12}
+          borderColor={C.border}
+          backgroundColor={C.white}
+          textAlign="center"
+          fontSize={28}
+          letterSpacing={16}
+        />
+        <Input
+          keyboardType="numeric"
+          secureTextEntry
+          maxLength={4}
+          placeholder="Confirm PIN"
+          size="$6"
+          borderRadius={12}
+          borderColor={C.border}
+          backgroundColor={C.white}
+          textAlign="center"
+          fontSize={28}
+          letterSpacing={16}
+        />
+
+        <XStack gap={12} alignItems="center" backgroundColor={C.successBg} borderRadius={12} padding={12}>
+          <Paragraph fontSize={18}>💡</Paragraph>
+          <Paragraph color={C.success} fontSize={13} flex={1}>
+            Biometric authentication can be enabled after setup in Settings.
+          </Paragraph>
+        </XStack>
+
+        <Button backgroundColor={C.orange} color="white" size="$5" borderRadius={14}
+          onPress={() => router.replace('/(parent)')}>
+          Complete Setup & Enter App
         </Button>
       </YStack>
     </SafeAreaView>
   )
 }
+const s = StyleSheet.create({ container: { flex: 1, backgroundColor: C.white } })

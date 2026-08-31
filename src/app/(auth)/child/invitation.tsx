@@ -1,25 +1,34 @@
-import { YStack, H2, Paragraph, Button, Input, Label } from 'tamagui'
+import { StyleSheet } from 'react-native'
+import { YStack, XStack, Paragraph, Button, Input } from 'tamagui'
 import { useRouter } from 'expo-router'
 import { SafeAreaView } from 'react-native-safe-area-context'
+import { C } from '../../../constants/theme'
 
 export default function ChildInvitation() {
   const router = useRouter()
-
   return (
-    <SafeAreaView style={{ flex: 1, backgroundColor: '#ffffff' }}>
-      <YStack flex={1} padding="$4" gap="$4" justifyContent="center">
-        <H2 color="$color9">Parent Invitation</H2>
-        <Paragraph color="$color" marginBottom="$4">Enter the invitation code provided by your parent.</Paragraph>
-        
-        <YStack gap="$2">
-          <Label htmlFor="code">Invitation Code</Label>
-          <Input id="code" autoCapitalize="characters" placeholder="ABC-123" size="$4" />
+    <SafeAreaView style={s.container}>
+      <YStack flex={1} paddingHorizontal={24} paddingTop={48} gap={20}>
+        <Paragraph fontSize={26} fontWeight="bold" color={C.text}>Enter Invitation</Paragraph>
+        <Paragraph color={C.muted} fontSize={14}>Your parent sent you an invitation code. Enter it below.</Paragraph>
+        <YStack gap={8}>
+          <Paragraph fontSize={13} fontWeight="600" color={C.text}>Invitation Code</Paragraph>
+          <Input autoCapitalize="characters" placeholder="e.g. ABC-123" size="$6"
+            borderRadius={12} borderColor={C.orange} borderWidth={2}
+            backgroundColor={C.white} textAlign="center" fontSize={22} letterSpacing={4} />
         </YStack>
-
-        <Button backgroundColor="$color9" color="white" size="$5" onPress={() => router.push('/(auth)/child/register')} marginTop="$4">
+        <XStack backgroundColor={C.orangeLight} borderRadius={12} padding={12} gap={10}>
+          <Paragraph fontSize={16}>📩</Paragraph>
+          <Paragraph color={C.orange} fontSize={13} flex={1}>
+            Ask your parent to generate a code from their Parent App → Children → Add Child.
+          </Paragraph>
+        </XStack>
+        <Button backgroundColor={C.orange} color="white" size="$5" borderRadius={14}
+          onPress={() => router.push('/(auth)/child/register')}>
           Verify Code
         </Button>
       </YStack>
     </SafeAreaView>
   )
 }
+const s = StyleSheet.create({ container: { flex: 1, backgroundColor: C.white } })

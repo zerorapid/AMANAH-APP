@@ -1,30 +1,35 @@
-import { YStack, H2, Paragraph, Button, Input, Label } from 'tamagui'
+import { StyleSheet } from 'react-native'
+import { YStack, Paragraph, Button, Input } from 'tamagui'
 import { useRouter } from 'expo-router'
 import { SafeAreaView } from 'react-native-safe-area-context'
+import { C } from '../../../constants/theme'
 
 export default function ChildRegister() {
   const router = useRouter()
-
   return (
-    <SafeAreaView style={{ flex: 1, backgroundColor: '#ffffff' }}>
-      <YStack flex={1} padding="$4" gap="$4" justifyContent="center">
-        <H2 color="$color9">Your Details</H2>
-        <Paragraph color="$color" marginBottom="$4">Set up your profile.</Paragraph>
-        
-        <YStack gap="$2">
-          <Label htmlFor="name">Full Name</Label>
-          <Input id="name" placeholder="Alex" size="$4" />
+    <SafeAreaView style={s.container}>
+      <YStack flex={1} paddingHorizontal={24} paddingTop={48} gap={20}>
+        <Paragraph fontSize={26} fontWeight="bold" color={C.text}>Your Details</Paragraph>
+        <Paragraph color={C.muted} fontSize={14}>Set up your profile to get started.</Paragraph>
+        <YStack gap={8}>
+          <Paragraph fontSize={13} fontWeight="600" color={C.text}>Full Name</Paragraph>
+          <Input placeholder="Alex" size="$5" borderRadius={12} borderColor={C.border} backgroundColor={C.white} />
         </YStack>
-
-        <YStack gap="$2">
-          <Label htmlFor="mobile">Mobile Number (Optional)</Label>
-          <Input id="mobile" keyboardType="phone-pad" placeholder="+1 234 567 8900" size="$4" />
+        <YStack gap={8}>
+          <Paragraph fontSize={13} fontWeight="600" color={C.text}>Mobile Number (Optional)</Paragraph>
+          <Input keyboardType="phone-pad" placeholder="+1 234 567 8900" size="$5"
+            borderRadius={12} borderColor={C.border} backgroundColor={C.white} />
         </YStack>
-
-        <Button backgroundColor="$color9" color="white" size="$5" onPress={() => router.push('/(auth)/child/security')} marginTop="$4">
+        <YStack gap={8}>
+          <Paragraph fontSize={13} fontWeight="600" color={C.text}>Date of Birth</Paragraph>
+          <Input placeholder="DD / MM / YYYY" size="$5" borderRadius={12} borderColor={C.border} backgroundColor={C.white} />
+        </YStack>
+        <Button marginTop={8} backgroundColor={C.orange} color="white" size="$5" borderRadius={14}
+          onPress={() => router.push('/(auth)/child/security')}>
           Next
         </Button>
       </YStack>
     </SafeAreaView>
   )
 }
+const s = StyleSheet.create({ container: { flex: 1, backgroundColor: C.white } })

@@ -1,29 +1,17 @@
-// Central theme tokens for Amanah App
-export const COLORS = {
-  primary: '#FF6B00',
-  primaryLight: '#FFF5EC',
-  primaryDark: '#CC5600',
+export const C = {
+  orange: '#FF6B00',
+  orangeLight: '#FFF0E5',
+  orangeDark: '#CC5600',
   white: '#FFFFFF',
-  surface: '#F9F9F9',
-  border: '#E5E5E5',
+  bg: '#F8F8F8',
+  border: '#E8E8E8',
   text: '#1A1A1A',
-  textMuted: '#6B7280',
+  muted: '#6B7280',
   success: '#16A34A',
+  successBg: '#F0FDF4',
   error: '#DC2626',
+  errorBg: '#FEF2F2',
   warning: '#D97706',
-} as const
-
-export const SPACING = {
-  xs: 4,
-  sm: 8,
-  md: 16,
-  lg: 24,
-  xl: 32,
-} as const
-
-export const RADIUS = {
-  sm: 8,
-  md: 12,
-  lg: 16,
-  full: 999,
+  warningBg: '#FFFBEB',
+  cardBg: '#FFFFFF',
 } as const

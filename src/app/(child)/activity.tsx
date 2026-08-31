@@ -1,36 +1,36 @@
-import { ScrollView, StyleSheet } from 'react-native'
-import { YStack, XStack, H4, Paragraph, Card } from 'tamagui'
+import { ScrollView, StyleSheet, View } from 'react-native'
+import { YStack, XStack, Paragraph } from 'tamagui'
 import { SafeAreaView } from 'react-native-safe-area-context'
-import { COLORS } from '../../constants/theme'
+import { C } from '../../constants/theme'
 import { useChildStore } from '../../store/childStore'
 
 export default function ChildActivity() {
   const { transactions } = useChildStore()
 
   return (
-    <SafeAreaView style={styles.container} edges={['top']}>
-      <ScrollView contentContainerStyle={styles.scroll}>
-        <H4 color={COLORS.primary} marginBottom="$4">All Activity</H4>
-        <YStack gap="$2">
+    <SafeAreaView style={s.container} edges={['top']}>
+      <ScrollView contentContainerStyle={s.scroll} showsVerticalScrollIndicator={false}>
+        <Paragraph fontSize={20} fontWeight="bold" color={C.text} marginBottom={16}>All Activity</Paragraph>
+        <YStack gap={8}>
           {transactions.map((tx) => (
-            <Card key={tx.id} borderColor={COLORS.border} borderWidth={1} borderRadius={12} padding="$3">
+            <View key={tx.id} style={s.card}>
               <XStack justifyContent="space-between" alignItems="center">
-                <XStack gap="$3" alignItems="center">
-                  <Paragraph fontSize={22}>{tx.icon}</Paragraph>
-                  <YStack>
-                    <Paragraph fontWeight="bold" size="$3" color={COLORS.text}>{tx.merchant}</Paragraph>
-                    <Paragraph size="$2" color={COLORS.textMuted}>{tx.date}</Paragraph>
+                <XStack gap={12} alignItems="center" flex={1}>
+                  <Paragraph fontSize={24}>{tx.icon}</Paragraph>
+                  <YStack flex={1}>
+                    <Paragraph fontSize={15} fontWeight="bold" color={C.text}>{tx.merchant}</Paragraph>
+                    <Paragraph fontSize={12} color={C.muted}>{tx.date}</Paragraph>
                     {tx.status === 'blocked' && (
-                      <Paragraph size="$2" color={COLORS.error} fontWeight="bold">Blocked by parent</Paragraph>
+                      <Paragraph fontSize={12} color={C.error} fontWeight="bold">Blocked by parent</Paragraph>
                     )}
                   </YStack>
                 </XStack>
-                <Paragraph fontWeight="bold"
-                  color={tx.amount > 0 ? COLORS.success : tx.status === 'blocked' ? COLORS.error : COLORS.text}>
+                <Paragraph fontSize={15} fontWeight="bold"
+                  color={tx.amount > 0 ? C.success : tx.status === 'blocked' ? C.error : C.text}>
                   {tx.amount > 0 ? '+' : ''}${Math.abs(tx.amount).toFixed(2)}
                 </Paragraph>
               </XStack>
-            </Card>
+            </View>
           ))}
         </YStack>
       </ScrollView>
@@ -38,7 +38,8 @@ export default function ChildActivity() {
   )
 }
 
-const styles = StyleSheet.create({
-  container: { flex: 1, backgroundColor: '#FFFFFF' },
+const s = StyleSheet.create({
+  container: { flex: 1, backgroundColor: C.white },
   scroll: { padding: 16, paddingBottom: 40 },
+  card: { backgroundColor: C.white, borderRadius: 12, borderWidth: 1, borderColor: C.border, padding: 14 },
 })
