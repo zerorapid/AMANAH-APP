@@ -1,32 +1,48 @@
-import { StyleSheet, TouchableOpacity } from 'react-native'
-import { YStack, Paragraph, Button } from 'tamagui'
+import { StyleSheet, TouchableOpacity, ScrollView, View } from 'react-native'
+import { YStack, XStack, Paragraph, Button, Input } from 'tamagui'
 import { useRouter } from 'expo-router'
 import { SafeAreaView } from 'react-native-safe-area-context'
-import { ChevronLeft, Info } from 'lucide-react-native'
+import { ChevronLeft, User, CreditCard } from 'lucide-react-native'
 import { C } from '../../constants/theme'
+import { useParentStore } from '../../store/parentStore'
 
-export default function GenericSubScreen() {
+export default function ChildDetails() {
   const router = useRouter()
+  const { children } = useParentStore()
+  const child = children[0] // Mocking the first child
+
   return (
     <SafeAreaView style={s.container}>
-      <YStack flex={1} paddingHorizontal={24} paddingTop={20} gap={24}>
-        <TouchableOpacity onPress={() => router.back()} style={{ alignSelf: 'flex-start', padding: 8, marginLeft: -8 }}>
+      <ScrollView contentContainerStyle={{ paddingHorizontal: 24, paddingTop: 20, paddingBottom: 40 }}>
+        <TouchableOpacity onPress={() => router.back()} style={{ alignSelf: 'flex-start', padding: 8, marginLeft: -8, marginBottom: 16 }}>
           <ChevronLeft size={28} color={C.text} />
         </TouchableOpacity>
         
-        <YStack gap={8}>
-          <Paragraph fontSize={26} fontWeight="bold" color={C.text}>Child Settings</Paragraph>
-          <Paragraph color={C.muted} fontSize={14}>Manage individual limits, cards, and restrictions.</Paragraph>
+        <YStack alignItems="center" gap={12} marginBottom={24}>
+          <View style={{ width: 80, height: 80, borderRadius: 40, backgroundColor: C.primaryLight, justifyContent: 'center', alignItems: 'center' }}>
+            <User size={40} color={C.primary} />
+          </View>
+          <Paragraph fontSize={24} fontWeight="bold" color={C.text}>{child.name}</Paragraph>
+          <Paragraph color={C.muted} fontSize={14}>Balance: {child.balance.toFixed(2)} SAR</Paragraph>
         </YStack>
 
-        <YStack flex={1} justifyContent="center" alignItems="center" gap={12} opacity={0.5}>
-          <Info size={48} color={C.muted} />
-          <Paragraph color={C.muted} textAlign="center">
-            This module is structured and ready for backend data integration.
-          </Paragraph>
+        <YStack gap={16}>
+          <YStack gap={8}>
+            <Paragraph fontSize={13} fontWeight="600" color={C.text}>Daily Limit (SAR)</Paragraph>
+            <Input keyboardType="numeric" value={child.dailyLimit.toString()} size="$5" borderRadius={12} />
+          </YStack>
+          
+          <YStack gap={8}>
+            <Paragraph fontSize={13} fontWeight="600" color={C.text}>Monthly Limit (SAR)</Paragraph>
+            <Input keyboardType="numeric" value={child.monthlyLimit.toString()} size="$5" borderRadius={12} />
+          </YStack>
+
+          <Button marginTop={16} backgroundColor={C.primary} color="white" size="$5" borderRadius={14} onPress={() => router.back()}>
+            Save Changes
+          </Button>
         </YStack>
-      </YStack>
+      </ScrollView>
     </SafeAreaView>
   )
 }
-const s = StyleSheet.create({ container: { flex: 1, backgroundColor: C.bg } })
+const s = StyleSheet.create({ container: { flex: 1, backgroundColor: C.white } })

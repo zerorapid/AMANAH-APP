@@ -1,32 +1,39 @@
-import { StyleSheet, TouchableOpacity } from 'react-native'
-import { YStack, Paragraph, Button } from 'tamagui'
+import { StyleSheet, TouchableOpacity, ScrollView } from 'react-native'
+import { YStack, XStack, Paragraph, Switch } from 'tamagui'
 import { useRouter } from 'expo-router'
 import { SafeAreaView } from 'react-native-safe-area-context'
-import { ChevronLeft, Info } from 'lucide-react-native'
+import { ChevronLeft } from 'lucide-react-native'
 import { C } from '../../constants/theme'
 
-export default function GenericSubScreen() {
+export default function GenSettings() {
   const router = useRouter()
   return (
     <SafeAreaView style={s.container}>
-      <YStack flex={1} paddingHorizontal={24} paddingTop={20} gap={24}>
-        <TouchableOpacity onPress={() => router.back()} style={{ alignSelf: 'flex-start', padding: 8, marginLeft: -8 }}>
+      <ScrollView contentContainerStyle={{ paddingHorizontal: 24, paddingTop: 20, paddingBottom: 40 }}>
+        <TouchableOpacity onPress={() => router.back()} style={{ alignSelf: 'flex-start', padding: 8, marginLeft: -8, marginBottom: 16 }}>
           <ChevronLeft size={28} color={C.text} />
         </TouchableOpacity>
         
-        <YStack gap={8}>
+        <YStack gap={8} marginBottom={24}>
           <Paragraph fontSize={26} fontWeight="bold" color={C.text}>App Settings</Paragraph>
-          <Paragraph color={C.muted} fontSize={14}>Configure language, theme, and data preferences.</Paragraph>
+          <Paragraph color={C.muted} fontSize={14}>Manage your preferences.</Paragraph>
         </YStack>
 
-        <YStack flex={1} justifyContent="center" alignItems="center" gap={12} opacity={0.5}>
-          <Info size={48} color={C.muted} />
-          <Paragraph color={C.muted} textAlign="center">
-            This module is structured and ready for backend data integration.
-          </Paragraph>
+        <YStack gap={12}>
+          {[1, 2, 3].map(i => (
+            <XStack key={i} style={s.card} justifyContent="space-between" alignItems="center">
+              <Paragraph fontSize={15} fontWeight="600" color={C.text}>Setting Option {i}</Paragraph>
+              <Switch size="$3" checked={i !== 2} backgroundColor={i !== 2 ? C.primary : C.border}>
+                <Switch.Thumb backgroundColor="white" />
+              </Switch>
+            </XStack>
+          ))}
         </YStack>
-      </YStack>
+      </ScrollView>
     </SafeAreaView>
   )
 }
-const s = StyleSheet.create({ container: { flex: 1, backgroundColor: C.bg } })
+const s = StyleSheet.create({ 
+  container: { flex: 1, backgroundColor: C.bg },
+  card: { backgroundColor: C.white, borderRadius: 12, borderWidth: 1, borderColor: C.border, padding: 16 }
+})
