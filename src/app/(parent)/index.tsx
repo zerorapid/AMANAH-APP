@@ -1,51 +1,49 @@
 import { ScrollView, StyleSheet } from 'react-native'
 import { YStack, XStack, H2, H4, Paragraph, Button, Card, Avatar, Separator, Progress } from 'tamagui'
-import { Bell, Plus, Send, ArrowDownCircle, CheckCircle, Clock } from '@tamagui/lucide-icons'
+import { Bell, Plus, Send, ArrowDownCircle, Clock } from '@tamagui/lucide-icons'
 import { SafeAreaView } from 'react-native-safe-area-context'
 import { COLORS } from '../../constants/theme'
-
-const pendingApprovals = [
-  { id: 1, child: 'Alex', merchant: 'Steam Games', amount: '$15.00' },
-]
+import { useParentStore } from '../../store/parentStore'
 
 export default function ParentDashboard() {
+  const { parent, children, transactions, approvalRequests, approveRequest, declineRequest } = useParentStore()
+  const pending = approvalRequests.filter((r) => r.status === 'pending')
+
   return (
     <SafeAreaView style={styles.container} edges={['top']}>
       <ScrollView contentContainerStyle={styles.scroll}>
-
         {/* Header */}
         <XStack justifyContent="space-between" alignItems="center" marginBottom="$5">
           <XStack gap="$3" alignItems="center">
             <Avatar circular size="$5">
-              <Avatar.Image src="https://i.pravatar.cc/150?u=parent" />
+              <Avatar.Image src={parent.avatar} />
               <Avatar.Fallback backgroundColor={COLORS.primaryLight} />
             </Avatar>
             <YStack>
               <Paragraph size="$2" color={COLORS.textMuted}>Welcome back</Paragraph>
-              <H4 color={COLORS.primary}>John Doe</H4>
+              <H4 color={COLORS.primary}>{parent.name}</H4>
             </YStack>
           </XStack>
-          <Button
-            circular size="$3"
-            backgroundColor={COLORS.primaryLight}
-            icon={<Bell size={18} color={COLORS.primary} />}
-          />
+          <Button circular size="$3" backgroundColor={COLORS.primaryLight}
+            icon={<Bell size={18} color={COLORS.primary} />} />
         </XStack>
 
         {/* Balance Card */}
         <Card backgroundColor={COLORS.primary} borderRadius={20} padding="$5" marginBottom="$5">
           <YStack gap="$2">
             <Paragraph color="white" opacity={0.85}>Available Balance</Paragraph>
-            <H2 color="white" fontSize={36}>$2,450.00</H2>
+            <H2 color="white" fontSize={36}>${parent.balance.toFixed(2)}</H2>
             <Separator borderColor="rgba(255,255,255,0.25)" marginVertical="$2" />
             <XStack justifyContent="space-between">
               <YStack gap="$1">
                 <Paragraph color="white" opacity={0.75} size="$2">Total Allocated</Paragraph>
-                <Paragraph color="white" fontWeight="bold">$300.00</Paragraph>
+                <Paragraph color="white" fontWeight="bold">
+                  ${children.reduce((sum, c) => sum + c.balance, 0).toFixed(2)}
+                </Paragraph>
               </YStack>
               <YStack gap="$1" alignItems="flex-end">
-                <Paragraph color="white" opacity={0.75} size="$2">Next Allowance</Paragraph>
-                <Paragraph color="white" fontWeight="bold">in 3 days</Paragraph>
+                <Paragraph color="white" opacity={0.75} size="$2">Pending Approvals</Paragraph>
+                <Paragraph color="white" fontWeight="bold">{pending.length}</Paragraph>
               </YStack>
             </XStack>
           </YStack>
@@ -53,72 +51,67 @@ export default function ParentDashboard() {
 
         {/* Quick Actions */}
         <XStack gap="$3" marginBottom="$5">
-          <Button flex={1} icon={<Send size={15} />} backgroundColor={COLORS.primaryLight} color={COLORS.primary} fontWeight="bold">
-            Send
-          </Button>
-          <Button flex={1} icon={<Plus size={15} />} backgroundColor={COLORS.primaryLight} color={COLORS.primary} fontWeight="bold">
-            Add Funds
-          </Button>
-          <Button flex={1} icon={<ArrowDownCircle size={15} />} backgroundColor={COLORS.primaryLight} color={COLORS.primary} fontWeight="bold">
-            Top Up
-          </Button>
+          {[
+            { label: 'Send', icon: <Send size={15} /> },
+            { label: 'Add Funds', icon: <Plus size={15} /> },
+            { label: 'Top Up', icon: <ArrowDownCircle size={15} /> },
+          ].map((a) => (
+            <Button key={a.label} flex={1} icon={a.icon} backgroundColor={COLORS.primaryLight} color={COLORS.primary} fontWeight="bold">
+              {a.label}
+            </Button>
+          ))}
         </XStack>
 
         {/* Pending Approvals */}
-        {pendingApprovals.length > 0 && (
-          <Card borderColor={COLORS.warning} borderWidth={1.5} borderRadius={14} padding="$4" backgroundColor="#FFFBEB" marginBottom="$5">
+        {pending.length > 0 && (
+          <Card borderColor={COLORS.warning} borderWidth={1.5} borderRadius={14}
+            padding="$4" backgroundColor="#FFFBEB" marginBottom="$5">
             <XStack gap="$2" alignItems="center" marginBottom="$3">
               <Clock size={16} color={COLORS.warning} />
-              <Paragraph fontWeight="bold" color={COLORS.warning}>Pending Approval</Paragraph>
+              <Paragraph fontWeight="bold" color={COLORS.warning}>Pending Approvals ({pending.length})</Paragraph>
             </XStack>
-            {pendingApprovals.map(p => (
-              <XStack key={p.id} justifyContent="space-between" alignItems="center">
-                <YStack>
-                  <Paragraph fontWeight="bold" color={COLORS.text}>{p.child} → {p.merchant}</Paragraph>
-                  <Paragraph size="$2" color={COLORS.textMuted}>{p.amount}</Paragraph>
-                </YStack>
-                <XStack gap="$2">
-                  <Button size="$2" backgroundColor={COLORS.success} color="white">✓</Button>
-                  <Button size="$2" backgroundColor={COLORS.error} color="white">✗</Button>
+            <YStack gap="$3">
+              {pending.map((r) => (
+                <XStack key={r.id} justifyContent="space-between" alignItems="center">
+                  <YStack flex={1}>
+                    <Paragraph fontWeight="bold" color={COLORS.text}>{r.childName} → {r.merchant}</Paragraph>
+                    <Paragraph size="$2" color={COLORS.textMuted}>${r.amount.toFixed(2)} · {r.createdAt}</Paragraph>
+                  </YStack>
+                  <XStack gap="$2">
+                    <Button size="$2" backgroundColor={COLORS.success} color="white" onPress={() => approveRequest(r.id)}>✓</Button>
+                    <Button size="$2" backgroundColor={COLORS.error} color="white" onPress={() => declineRequest(r.id)}>✗</Button>
+                  </XStack>
                 </XStack>
-              </XStack>
-            ))}
+              ))}
+            </YStack>
           </Card>
         )}
 
         {/* Children */}
         <XStack justifyContent="space-between" alignItems="center" marginBottom="$3">
           <H4 color={COLORS.text}>Your Children</H4>
-          <Button size="$2" backgroundColor={COLORS.primaryLight} color={COLORS.primary} icon={<Plus size={13} />}>
-            Add
-          </Button>
+          <Button size="$2" backgroundColor={COLORS.primaryLight} color={COLORS.primary} icon={<Plus size={13} />}>Add</Button>
         </XStack>
-
         <YStack gap="$3" marginBottom="$5">
-          {[
-            { name: 'Alex', balance: '$45', spent: 55, limit: 150, avatar: 'child1' },
-            { name: 'Sarah', balance: '$30', spent: 70, limit: 100, avatar: 'child2' },
-          ].map(child => (
-            <Card key={child.name} borderColor={COLORS.border} borderWidth={1} borderRadius={14} padding="$4">
+          {children.map((child) => (
+            <Card key={child.id} borderColor={COLORS.border} borderWidth={1} borderRadius={14} padding="$4">
               <XStack gap="$3" alignItems="center" marginBottom="$2">
                 <Avatar circular size="$4">
-                  <Avatar.Image src={`https://i.pravatar.cc/150?u=${child.avatar}`} />
+                  <Avatar.Image src={child.avatar} />
                   <Avatar.Fallback backgroundColor={COLORS.primaryLight} />
                 </Avatar>
                 <YStack flex={1}>
                   <Paragraph fontWeight="bold" color={COLORS.primary}>{child.name}</Paragraph>
-                  <Paragraph size="$2" color={COLORS.textMuted}>Balance: {child.balance}</Paragraph>
+                  <Paragraph size="$2" color={COLORS.textMuted}>Balance: ${child.balance.toFixed(2)}</Paragraph>
                 </YStack>
-                <Button size="$2" backgroundColor={COLORS.primaryLight} color={COLORS.primary}>
-                  Manage
-                </Button>
+                <Button size="$2" backgroundColor={COLORS.primaryLight} color={COLORS.primary}>Manage</Button>
               </XStack>
               <YStack gap="$1">
                 <XStack justifyContent="space-between">
-                  <Paragraph size="$2" color={COLORS.textMuted}>Spent this month</Paragraph>
-                  <Paragraph size="$2" color={COLORS.textMuted}>${child.spent} / ${child.limit}</Paragraph>
+                  <Paragraph size="$2" color={COLORS.textMuted}>Monthly spending</Paragraph>
+                  <Paragraph size="$2" color={COLORS.textMuted}>${child.spent} / ${child.monthlyLimit}</Paragraph>
                 </XStack>
-                <Progress value={(child.spent / child.limit) * 100} size="$1" backgroundColor={COLORS.primaryLight}>
+                <Progress value={(child.spent / child.monthlyLimit) * 100} size="$1" backgroundColor={COLORS.primaryLight}>
                   <Progress.Indicator backgroundColor={COLORS.primary} />
                 </Progress>
               </YStack>
@@ -129,25 +122,21 @@ export default function ParentDashboard() {
         {/* Recent Transactions */}
         <H4 color={COLORS.text} marginBottom="$3">Recent Activity</H4>
         <YStack gap="$2">
-          {[
-            { icon: '🛒', merchant: 'Amazon', child: 'Alex', amount: '-$12.50', status: 'Completed' },
-            { icon: '🎮', merchant: 'Steam', child: 'Alex', amount: '-$20.00', status: 'Blocked' },
-            { icon: '💰', merchant: 'Allowance', child: 'Sarah', amount: '+$50.00', status: 'Completed' },
-          ].map((tx, i) => (
-            <Card key={i} borderColor={COLORS.border} borderWidth={1} borderRadius={12} padding="$3">
+          {transactions.slice(0, 5).map((tx) => (
+            <Card key={tx.id} borderColor={COLORS.border} borderWidth={1} borderRadius={12} padding="$3">
               <XStack justifyContent="space-between" alignItems="center">
                 <XStack gap="$3" alignItems="center">
                   <Paragraph fontSize={22}>{tx.icon}</Paragraph>
                   <YStack>
                     <Paragraph fontWeight="bold" size="$3" color={COLORS.text}>{tx.merchant}</Paragraph>
-                    <Paragraph size="$2" color={COLORS.textMuted}>{tx.child}</Paragraph>
+                    <Paragraph size="$2" color={COLORS.textMuted}>{tx.date}</Paragraph>
                   </YStack>
                 </XStack>
                 <YStack alignItems="flex-end">
-                  <Paragraph fontWeight="bold" color={tx.amount.startsWith('+') ? COLORS.success : COLORS.text}>
-                    {tx.amount}
+                  <Paragraph fontWeight="bold" color={tx.amount > 0 ? COLORS.success : COLORS.text}>
+                    {tx.amount > 0 ? '+' : ''}${Math.abs(tx.amount).toFixed(2)}
                   </Paragraph>
-                  {tx.status === 'Blocked' && (
+                  {tx.status === 'blocked' && (
                     <Paragraph size="$2" color={COLORS.error} fontWeight="bold">Blocked</Paragraph>
                   )}
                 </YStack>
