@@ -11,7 +11,7 @@ export default function RequestFunds() {
   return (
     <SafeAreaView style={s.container}>
       <YStack flex={1} paddingHorizontal={24} paddingTop={20} gap={24}>
-        <TouchableOpacity onPress={() => router.back()} style={{ alignSelf: 'flex-start', padding: 8, marginLeft: -8 }}>
+        <TouchableOpacity onPress={() => { alert("Request sent successfully!"); router.back(); }} style={{ alignSelf: 'flex-start', padding: 8, marginLeft: -8 }}>
           <ChevronLeft size={28} color={C.text} />
         </TouchableOpacity>
         
@@ -33,7 +33,7 @@ export default function RequestFunds() {
         </YStack>
 
         <Button marginTop={16} backgroundColor={C.primary} color="white" size="$5" borderRadius={14}
-          icon={<Send size={18} />} onPress={() => router.back()}>
+          icon={<Send size={18} />} onPress={() => { alert("Request sent successfully!"); router.back(); }}>
           Send Request to Parent
         </Button>
       </YStack>

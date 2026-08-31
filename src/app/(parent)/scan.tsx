@@ -1,32 +1,47 @@
-import { StyleSheet, TouchableOpacity } from 'react-native'
+import { StyleSheet, TouchableOpacity, View } from 'react-native'
 import { YStack, Paragraph, Button } from 'tamagui'
 import { useRouter } from 'expo-router'
 import { SafeAreaView } from 'react-native-safe-area-context'
-import { ChevronLeft, Info } from 'lucide-react-native'
+import { ChevronLeft, ScanLine } from 'lucide-react-native'
 import { C } from '../../constants/theme'
 
-export default function GenericSubScreen() {
+export default function ScannerScreen() {
   const router = useRouter()
   return (
     <SafeAreaView style={s.container}>
-      <YStack flex={1} paddingHorizontal={24} paddingTop={20} gap={24}>
-        <TouchableOpacity onPress={() => router.back()} style={{ alignSelf: 'flex-start', padding: 8, marginLeft: -8 }}>
-          <ChevronLeft size={28} color={C.text} />
-        </TouchableOpacity>
-        
-        <YStack gap={8}>
-          <Paragraph fontSize={26} fontWeight="bold" color={C.text}>Parent Scanner</Paragraph>
-          <Paragraph color={C.muted} fontSize={14}>Scan a merchant QR code to pay directly from the master wallet.</Paragraph>
-        </YStack>
-
-        <YStack flex={1} justifyContent="center" alignItems="center" gap={12} opacity={0.5}>
-          <Info size={48} color={C.muted} />
-          <Paragraph color={C.muted} textAlign="center">
-            This module is structured and ready for backend data integration.
+      <YStack flex={1}>
+        <View style={s.header}>
+          <TouchableOpacity onPress={() => router.back()} style={{ padding: 8 }}>
+            <ChevronLeft size={28} color="white" />
+          </TouchableOpacity>
+          <Paragraph fontSize={20} fontWeight="bold" color="white" flex={1} textAlign="center" marginRight={40}>
+            Parent Scanner
           </Paragraph>
-        </YStack>
+        </View>
+
+        <View style={s.cameraSim}>
+          <View style={s.frame}>
+            <ScanLine size={120} color={C.primary} opacity={0.8} />
+          </View>
+          <Paragraph color="white" marginTop={24} fontSize={16}>Align QR Code within the frame</Paragraph>
+        </View>
+
+        <View style={s.footer}>
+          <Button backgroundColor={C.primary} color="white" size="$5" borderRadius={14} onPress={() => {
+            alert('Scan successful! Payment processing...');
+            router.back();
+          }}>
+            Simulate Scan (Web/Mock)
+          </Button>
+        </View>
       </YStack>
     </SafeAreaView>
   )
 }
-const s = StyleSheet.create({ container: { flex: 1, backgroundColor: C.bg } })
+const s = StyleSheet.create({ 
+  container: { flex: 1, backgroundColor: 'black' },
+  header: { flexDirection: 'row', alignItems: 'center', paddingHorizontal: 16, paddingTop: 20, zIndex: 10 },
+  cameraSim: { flex: 1, justifyContent: 'center', alignItems: 'center' },
+  frame: { width: 250, height: 250, borderWidth: 4, borderColor: C.primary, borderRadius: 24, justifyContent: 'center', alignItems: 'center', backgroundColor: 'rgba(255,255,255,0.1)' },
+  footer: { padding: 24, paddingBottom: 40, backgroundColor: 'black' }
+})

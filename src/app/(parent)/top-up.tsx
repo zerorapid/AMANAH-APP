@@ -1,12 +1,28 @@
 import { StyleSheet, TouchableOpacity, View } from 'react-native'
 import { YStack, XStack, Paragraph, Button, Input } from 'tamagui'
 import { useRouter } from 'expo-router'
+import { useState } from 'react'
 import { SafeAreaView } from 'react-native-safe-area-context'
 import { ChevronLeft, CreditCard } from 'lucide-react-native'
 import { C } from '../../constants/theme'
+import { useParentStore } from '../../store/parentStore'
 
 export default function TopUpScreen() {
   const router = useRouter()
+  const { updateBalance } = useParentStore()
+  const [amount, setAmount] = useState('')
+
+  const handleTopUp = () => {
+    const amt = parseFloat(amount)
+    if (isNaN(amt) || amt <= 0) return alert('Enter a valid amount')
+    
+    // Wire to store
+    updateBalance(amt)
+    
+    alert(`Successfully topped up ${amt} SAR to your Master Wallet`)
+    router.back()
+  }
+
   return (
     <SafeAreaView style={s.container}>
       <YStack flex={1} paddingHorizontal={24} paddingTop={20} gap={24}>
@@ -21,8 +37,8 @@ export default function TopUpScreen() {
 
         <YStack gap={8}>
           <Paragraph fontSize={13} fontWeight="600" color={C.text}>Amount (SAR)</Paragraph>
-          <Input keyboardType="numeric" placeholder="100.00" size="$6" fontSize={24} fontWeight="bold"
-            borderRadius={12} borderColor={C.border} backgroundColor={C.white} />
+          <Input keyboardType="numeric" placeholder="100.00" value={amount} onChangeText={setAmount} size="$6" fontSize={24} fontWeight="bold"
+            borderRadius={12} borderColor={C.border} backgroundColor={C.white} focusStyle={{ borderColor: C.primary }} />
         </YStack>
 
         <YStack gap={8}>
@@ -36,7 +52,7 @@ export default function TopUpScreen() {
         </YStack>
 
         <Button marginTop={16} backgroundColor={C.primary} color="white" size="$5" borderRadius={14}
-          onPress={() => router.back()}>
+          onPress={handleTopUp}>
           Authorize Payment
         </Button>
       </YStack>

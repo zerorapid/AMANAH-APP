@@ -1,40 +1,63 @@
-import { Mail } from "lucide-react-native";
-import { StyleSheet } from 'react-native'
-import { YStack, XStack, Paragraph, Button, Input } from 'tamagui'
+import { StyleSheet, TouchableOpacity, KeyboardAvoidingView, Platform, ScrollView } from 'react-native'
+import { YStack, Paragraph, Button, Input, XStack } from 'tamagui'
 import { useRouter } from 'expo-router'
+import { useState, useRef } from 'react'
 import { ChevronLeft } from 'lucide-react-native'
-import { TouchableOpacity } from 'react-native'
 import { SafeAreaView } from 'react-native-safe-area-context'
 import { C } from '../../../constants/theme'
 
 export default function ChildInvitation() {
   const router = useRouter()
+  const [code, setCode] = useState(['', '', '', '', '', ''])
+  
+  const handleNext = () => {
+    if (code.join('').length < 6) return alert("Please enter the full 6-digit code");
+    router.push('/(auth)/child/security');
+  }
+
   return (
     <SafeAreaView style={s.container}>
-      <YStack flex={1} paddingHorizontal={24} paddingTop={48} gap={20}>
-      <TouchableOpacity onPress={() => router.back()} style={{ alignSelf: 'flex-start', padding: 8, marginLeft: -8, marginBottom: 8 }}>
-        <ChevronLeft size={28} color={C.text} />
-      </TouchableOpacity>
-        <Paragraph fontSize={26} fontWeight="bold" color={C.text}>Enter Invitation</Paragraph>
-        <Paragraph color={C.muted} fontSize={14}>Your parent sent you an invitation code. Enter it below.</Paragraph>
-        <YStack gap={8}>
-          <Paragraph fontSize={13} fontWeight="600" color={C.text}>Invitation Code</Paragraph>
-          <Input autoCapitalize="characters" placeholder="e.g. ABC-123" size="$6"
-            borderRadius={12} borderColor={C.primary} borderWidth={2}
-            backgroundColor={C.white} textAlign="center" fontSize={22} letterSpacing={4} />
-        </YStack>
-        <XStack backgroundColor={C.primaryLight} borderRadius={12} padding={12} gap={10}>
-          <Mail size={18} color={C.primary} />
-          <Paragraph color={C.primary} fontSize={13} flex={1}>
-            Ask your parent to generate a code from their Parent App → Children → Add Child.
-          </Paragraph>
-        </XStack>
-        <Button backgroundColor={C.primary} color="white" size="$5" borderRadius={14}
-          onPress={() => router.push('/(auth)/child/register')}>
-          Verify Code
-        </Button>
-      </YStack>
+      <KeyboardAvoidingView behavior={Platform.OS === 'ios' ? 'padding' : 'height'} style={{ flex: 1 }}>
+        <ScrollView contentContainerStyle={{ paddingHorizontal: 24, paddingTop: 20, paddingBottom: 40 }} keyboardShouldPersistTaps="handled">
+          <TouchableOpacity onPress={() => router.back()} style={{ alignSelf: 'flex-start', padding: 8, marginLeft: -8, marginBottom: 16 }}>
+            <ChevronLeft size={28} color={C.text} />
+          </TouchableOpacity>
+          <Paragraph fontSize={28} fontWeight="bold" color={C.text} marginBottom={8}>Invitation Code</Paragraph>
+          <Paragraph color={C.muted} fontSize={15} marginBottom={32}>Ask your parent for your unique 6-digit invitation code to link your wallets.</Paragraph>
+          
+          <XStack gap={8} justifyContent="center" marginBottom={32}>
+            {code.map((char, index) => (
+              <Input
+                key={index}
+                value={char}
+                onChangeText={(text) => {
+                  let newCode = [...code]
+                  newCode[index] = text
+                  setCode(newCode)
+                }}
+                maxLength={1}
+                keyboardType="default"
+                autoCapitalize="characters"
+                size="$6"
+                width={45}
+                height={55}
+                textAlign="center"
+                fontSize={24}
+                fontWeight="bold"
+                borderRadius={12}
+                borderColor={char ? C.primary : C.border}
+                backgroundColor={C.white}
+                focusStyle={{ borderColor: C.primary }}
+              />
+            ))}
+          </XStack>
+          
+          <Button backgroundColor={C.primary} color="white" size="$5" borderRadius={14} onPress={handleNext}>
+            Verify Code
+          </Button>
+        </ScrollView>
+      </KeyboardAvoidingView>
     </SafeAreaView>
   )
 }
-const s = StyleSheet.create({ container: { flex: 1, backgroundColor: C.white } })
+const s = StyleSheet.create({ container: { flex: 1, backgroundColor: C.bg } })

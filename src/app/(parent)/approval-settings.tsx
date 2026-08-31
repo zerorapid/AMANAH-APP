@@ -1,5 +1,5 @@
 import { StyleSheet, TouchableOpacity, ScrollView } from 'react-native'
-import { YStack, XStack, Paragraph, Button, Switch } from 'tamagui'
+import { YStack, XStack, Paragraph, Switch } from 'tamagui'
 import { useRouter } from 'expo-router'
 import { SafeAreaView } from 'react-native-safe-area-context'
 import { ChevronLeft } from 'lucide-react-native'
@@ -8,7 +8,7 @@ import { useParentStore } from '../../store/parentStore'
 
 export default function ApprovalSettings() {
   const router = useRouter()
-  const { children } = useParentStore()
+  const { children, updateChild } = useParentStore()
 
   return (
     <SafeAreaView style={s.container}>
@@ -31,7 +31,12 @@ export default function ApprovalSettings() {
                   {c.paymentMode === 'auto' ? 'Auto-approved up to limit' : 'Requires approval'}
                 </Paragraph>
               </YStack>
-              <Switch size="$3" checked={c.paymentMode === 'auto'} backgroundColor={c.paymentMode === 'auto' ? C.success : C.border}>
+              <Switch 
+                size="$3" 
+                checked={c.paymentMode === 'auto'} 
+                onCheckedChange={(val) => updateChild(c.id, { paymentMode: val ? 'auto' : 'approval_required' })}
+                backgroundColor={c.paymentMode === 'auto' ? C.success : C.border}
+              >
                 <Switch.Thumb backgroundColor="white" />
               </Switch>
             </XStack>

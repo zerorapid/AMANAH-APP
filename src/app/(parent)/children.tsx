@@ -1,13 +1,15 @@
 import { ScrollView, StyleSheet, View, TouchableOpacity } from 'react-native'
-import { YStack, XStack, Paragraph, Button, Avatar } from 'tamagui'
+import { YStack, XStack, Paragraph, Button, Avatar, Sheet, H2 } from "tamagui"
 import { Plus, ChevronRight } from 'lucide-react-native'
 import { SafeAreaView } from 'react-native-safe-area-context'
 import { C } from '../../constants/theme'
 import { useParentStore } from '../../store/parentStore'
 
 import { useRouter } from 'expo-router'
+import { useState } from 'react'
 export default function ParentChildren() {
   const router = useRouter()
+  const [open, setOpen] = useState(false)
   const { children } = useParentStore()
 
   return (
@@ -64,6 +66,27 @@ export default function ParentChildren() {
           <Plus size={20} color={C.primary} />
           <Paragraph fontSize={15} color={C.primary} fontWeight="600">Invite Another Child</Paragraph>
         </TouchableOpacity>
+      
+      {/* Add Child Sheet */}
+      <Sheet modal open={open} onOpenChange={setOpen} snapPoints={[40]} dismissOnSnapToBottom>
+        <Sheet.Overlay enterStyle={{ opacity: 0 }} exitStyle={{ opacity: 0 }} backgroundColor="rgba(0,0,0,0.5)" />
+        <Sheet.Frame padding={24} justifyContent="center" alignItems="center" backgroundColor={C.white} borderTopLeftRadius={24} borderTopRightRadius={24}>
+          <Sheet.Handle backgroundColor={C.border} />
+          <YStack gap={16} alignItems="center" marginTop={20} width="100%">
+            <Paragraph fontSize={20} fontWeight="bold" color={C.text}>Invite Your Child</Paragraph>
+            <Paragraph color={C.muted} textAlign="center">
+              Give your child this unique code. They will enter it during their registration to link to your wallet.
+            </Paragraph>
+            <YStack backgroundColor={C.primaryLight} padding={20} borderRadius={16} width="100%" alignItems="center" marginTop={10}>
+              <H2 fontWeight="bold" color={C.primary} letterSpacing={4}>XYZ-789</H2>
+            </YStack>
+            <Button marginTop={20} backgroundColor={C.primary} color="white" size="$5" borderRadius={14} width="100%" onPress={() => setOpen(false)}>
+              Done
+            </Button>
+          </YStack>
+        </Sheet.Frame>
+      </Sheet>
+
       </ScrollView>
     </SafeAreaView>
   )

@@ -1,19 +1,32 @@
 import { StyleSheet, TouchableOpacity, ScrollView, View } from 'react-native'
-import { YStack, XStack, Paragraph, Button, Input } from 'tamagui'
+import { YStack, Paragraph, Button, Input } from 'tamagui'
 import { useRouter } from 'expo-router'
+import { useState } from 'react'
 import { SafeAreaView } from 'react-native-safe-area-context'
-import { ChevronLeft, User, CreditCard } from 'lucide-react-native'
+import { ChevronLeft, User } from 'lucide-react-native'
 import { C } from '../../constants/theme'
 import { useParentStore } from '../../store/parentStore'
 
 export default function ChildDetails() {
   const router = useRouter()
-  const { children } = useParentStore()
+  const { children, updateChild } = useParentStore()
   const child = children[0] // Mocking the first child
+
+  const [daily, setDaily] = useState(child.dailyLimit.toString())
+  const [monthly, setMonthly] = useState(child.monthlyLimit.toString())
+
+  const handleSave = () => {
+    updateChild(child.id, {
+      dailyLimit: parseFloat(daily) || child.dailyLimit,
+      monthlyLimit: parseFloat(monthly) || child.monthlyLimit
+    })
+    alert('Limits updated successfully')
+    router.back()
+  }
 
   return (
     <SafeAreaView style={s.container}>
-      <ScrollView contentContainerStyle={{ paddingHorizontal: 24, paddingTop: 20, paddingBottom: 40 }}>
+      <ScrollView contentContainerStyle={{ paddingHorizontal: 24, paddingTop: 20, paddingBottom: 40 }} keyboardShouldPersistTaps="handled">
         <TouchableOpacity onPress={() => router.back()} style={{ alignSelf: 'flex-start', padding: 8, marginLeft: -8, marginBottom: 16 }}>
           <ChevronLeft size={28} color={C.text} />
         </TouchableOpacity>
@@ -29,15 +42,15 @@ export default function ChildDetails() {
         <YStack gap={16}>
           <YStack gap={8}>
             <Paragraph fontSize={13} fontWeight="600" color={C.text}>Daily Limit (SAR)</Paragraph>
-            <Input keyboardType="numeric" value={child.dailyLimit.toString()} size="$5" borderRadius={12} />
+            <Input keyboardType="numeric" value={daily} onChangeText={setDaily} size="$5" borderRadius={12} focusStyle={{ borderColor: C.primary }} />
           </YStack>
           
           <YStack gap={8}>
             <Paragraph fontSize={13} fontWeight="600" color={C.text}>Monthly Limit (SAR)</Paragraph>
-            <Input keyboardType="numeric" value={child.monthlyLimit.toString()} size="$5" borderRadius={12} />
+            <Input keyboardType="numeric" value={monthly} onChangeText={setMonthly} size="$5" borderRadius={12} focusStyle={{ borderColor: C.primary }} />
           </YStack>
 
-          <Button marginTop={16} backgroundColor={C.primary} color="white" size="$5" borderRadius={14} onPress={() => router.back()}>
+          <Button marginTop={16} backgroundColor={C.primary} color="white" size="$5" borderRadius={14} onPress={handleSave}>
             Save Changes
           </Button>
         </YStack>
