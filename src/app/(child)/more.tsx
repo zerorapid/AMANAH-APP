@@ -18,7 +18,7 @@ export default function ChildMore() {
         <View style={s.profileCard}>
           <Avatar circular size="$6">
             <Avatar.Image src={child.avatar} />
-            <Avatar.Fallback backgroundColor={C.orangeLight} />
+            <Avatar.Fallback backgroundColor={C.primaryLight} />
           </Avatar>
           <YStack flex={1} gap={4}>
             <Paragraph fontSize={18} fontWeight="bold" color={C.white}>{child.name}</Paragraph>
@@ -37,9 +37,9 @@ export default function ChildMore() {
         </Paragraph>
         <View style={[s.card, { marginBottom: 20 }]}>
           {[
-            { label: 'Daily Limit', value: `$${child.dailyLimit}.00`, color: C.text },
-            { label: 'Monthly Limit', value: `$${child.monthlyLimit}.00`, color: C.text },
-            { label: 'Per Transaction', value: `$${child.perTransactionLimit}.00`, color: C.text },
+            { label: 'Daily Limit', value: `$${child.dailyLimit} SAR.00`, color: C.text },
+            { label: 'Monthly Limit', value: `$${child.monthlyLimit} SAR.00`, color: C.text },
+            { label: 'Per Transaction', value: `$${child.perTransactionLimit} SAR.00`, color: C.text },
             { label: 'Payment Mode', value: child.paymentMode === 'auto' ? 'Auto-Approved ✓' : 'Parent Approval Required', color: child.paymentMode === 'auto' ? C.success : C.warning },
             { label: 'Restricted', value: child.restrictedCategories.join(', '), color: C.error },
           ].map((row, i, arr) => (
@@ -57,9 +57,9 @@ export default function ChildMore() {
         <Paragraph fontSize={13} fontWeight="600" color={C.muted} marginBottom={10}>SETTINGS</Paragraph>
         <YStack gap={8} marginBottom={24}>
           {[
-            { icon: <Bell color={C.orange} size={20} />, label: 'Notifications' },
-            { icon: <ShieldAlert color={C.orange} size={20} />, label: 'Security & PIN' },
-            { icon: <User color={C.orange} size={20} />, label: 'My Profile' },
+            { icon: <Bell color={C.primary} size={20} />, label: 'Notifications' },
+            { icon: <ShieldAlert color={C.primary} size={20} />, label: 'Security & PIN' },
+            { icon: <User color={C.primary} size={20} />, label: 'My Profile' },
           ].map((item) => (
             <TouchableOpacity key={item.label} style={s.row} activeOpacity={0.7}>
               <XStack gap={14} alignItems="center" flex={1}>
@@ -89,7 +89,7 @@ export default function ChildMore() {
 const s = StyleSheet.create({
   container: { flex: 1, backgroundColor: C.bg },
   scroll: { padding: 16, paddingBottom: 40 },
-  profileCard: { backgroundColor: C.orange, borderRadius: 16, padding: 20, flexDirection: 'row',
+  profileCard: { backgroundColor: C.primary, borderRadius: 16, padding: 20, flexDirection: 'row',
     gap: 14, alignItems: 'center', marginBottom: 24 },
   badge: { backgroundColor: 'rgba(255,255,255,0.25)', borderRadius: 20, paddingHorizontal: 8,
     paddingVertical: 2, alignSelf: 'flex-start', marginTop: 2 },
@@ -97,5 +97,5 @@ const s = StyleSheet.create({
   divider: { height: 1, backgroundColor: C.border },
   row: { backgroundColor: C.white, borderRadius: 12, padding: 14, flexDirection: 'row',
     alignItems: 'center', borderWidth: 1, borderColor: C.border },
-  iconWrap: { backgroundColor: C.orangeLight, padding: 8, borderRadius: 10 },
+  iconWrap: { backgroundColor: C.primaryLight, padding: 8, borderRadius: 10 },
 })

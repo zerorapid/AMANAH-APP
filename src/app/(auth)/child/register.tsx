@@ -24,7 +24,7 @@ export default function ChildRegister() {
           <Paragraph fontSize={13} fontWeight="600" color={C.text}>Date of Birth</Paragraph>
           <Input placeholder="DD / MM / YYYY" size="$5" borderRadius={12} borderColor={C.border} backgroundColor={C.white} />
         </YStack>
-        <Button marginTop={8} backgroundColor={C.orange} color="white" size="$5" borderRadius={14}
+        <Button marginTop={8} backgroundColor={C.primary} color="white" size="$5" borderRadius={14}
           onPress={() => router.push('/(auth)/child/security')}>
           Next
         </Button>

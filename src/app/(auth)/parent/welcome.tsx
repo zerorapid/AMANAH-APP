@@ -1,6 +1,7 @@
 import { StyleSheet } from 'react-native'
 import { YStack, Paragraph, Button } from 'tamagui'
 import { useRouter } from 'expo-router'
+import { Users } from 'lucide-react-native'
 import { SafeAreaView } from 'react-native-safe-area-context'
 import { C } from '../../../constants/theme'
 
@@ -9,9 +10,9 @@ export default function ParentWelcome() {
   return (
     <SafeAreaView style={s.container}>
       <YStack flex={1} justifyContent="center" alignItems="center" paddingHorizontal={24} gap={16}>
-        <YStack width={80} height={80} borderRadius={22} backgroundColor={C.orange}
+        <YStack width={80} height={80} borderRadius={22} backgroundColor={C.primary}
           justifyContent="center" alignItems="center">
-          <Paragraph fontSize={36} color="white" fontWeight="bold">👨‍👧</Paragraph>
+          <Users size={36} color="white" />
         </YStack>
         <Paragraph fontSize={26} fontWeight="bold" color={C.text} textAlign="center">
           Parent Account
@@ -22,7 +23,7 @@ export default function ParentWelcome() {
         <Button
           marginTop={16}
           width="100%"
-          backgroundColor={C.orange}
+          backgroundColor={C.primary}
           color="white"
           size="$5"
           borderRadius={14}
@@ -33,11 +34,11 @@ export default function ParentWelcome() {
         <Button
           width="100%"
           backgroundColor="transparent"
-          color={C.orange}
+          color={C.primary}
           size="$4"
           borderRadius={14}
           borderWidth={1.5}
-          borderColor={C.orange}
+          borderColor={C.primary}
           onPress={() => router.push('/(parent)')}
         >
           Skip (Demo)

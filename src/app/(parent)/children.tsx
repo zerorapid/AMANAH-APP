@@ -13,7 +13,7 @@ export default function ParentChildren() {
       <ScrollView contentContainerStyle={s.scroll} showsVerticalScrollIndicator={false}>
         <XStack justifyContent="space-between" alignItems="center" marginBottom={16}>
           <Paragraph fontSize={20} fontWeight="bold" color={C.text}>Manage Children</Paragraph>
-          <Button size="$3" icon={<Plus size={14} />} backgroundColor={C.orange} color="white" borderRadius={10}>
+          <Button size="$3" icon={<Plus size={14} />} backgroundColor={C.primary} color="white" borderRadius={10}>
             Add Child
           </Button>
         </XStack>
@@ -27,17 +27,17 @@ export default function ParentChildren() {
               <XStack gap={12} alignItems="center">
                 <Avatar circular size="$5">
                   <Avatar.Image src={child.avatar} />
-                  <Avatar.Fallback backgroundColor={C.orangeLight} />
+                  <Avatar.Fallback backgroundColor={C.primaryLight} />
                 </Avatar>
                 <YStack flex={1}>
-                  <Paragraph fontSize={16} fontWeight="bold" color={C.orange}>{child.name}</Paragraph>
-                  <Paragraph fontSize={13} color={C.muted}>Monthly limit: ${child.monthlyLimit}</Paragraph>
+                  <Paragraph fontSize={16} fontWeight="bold" color={C.primary}>{child.name}</Paragraph>
+                  <Paragraph fontSize={13} color={C.muted}>Monthly limit: ${child.monthlyLimit} SAR</Paragraph>
                   <Paragraph fontSize={12} color={child.paymentMode === 'auto' ? C.success : C.warning}>
-                    {child.paymentMode === 'auto' ? '✓ Auto-Approved' : '⚡ Approval Required'}
+                    {child.paymentMode === 'auto' ? 'Auto-Approved' : 'Approval Required'}
                   </Paragraph>
                 </YStack>
                 <YStack alignItems="flex-end" gap={4}>
-                  <Paragraph fontSize={16} fontWeight="bold" color={C.text}>${child.balance}</Paragraph>
+                  <Paragraph fontSize={16} fontWeight="bold" color={C.text}>${child.balance} SAR</Paragraph>
                   <ChevronRight size={18} color={C.muted} />
                 </YStack>
               </XStack>
@@ -54,13 +54,13 @@ export default function ParentChildren() {
               <Paragraph fontSize={15} fontWeight="bold" color={C.text}>Leo</Paragraph>
               <Paragraph fontSize={13} color={C.muted}>Invitation sent · Code: XYZ-789</Paragraph>
             </YStack>
-            <Button size="$2" backgroundColor={C.orangeLight} color={C.orange}>Resend</Button>
+            <Button size="$2" backgroundColor={C.primaryLight} color={C.primary}>Resend</Button>
           </XStack>
         </View>
 
         <TouchableOpacity style={s.addCard} activeOpacity={0.7}>
-          <Plus size={20} color={C.orange} />
-          <Paragraph fontSize={15} color={C.orange} fontWeight="600">Invite Another Child</Paragraph>
+          <Plus size={20} color={C.primary} />
+          <Paragraph fontSize={15} color={C.primary} fontWeight="600">Invite Another Child</Paragraph>
         </TouchableOpacity>
       </ScrollView>
     </SafeAreaView>
@@ -71,6 +71,6 @@ const s = StyleSheet.create({
   container: { flex: 1, backgroundColor: C.white },
   scroll: { padding: 16, paddingBottom: 40 },
   card: { backgroundColor: C.white, borderRadius: 14, borderWidth: 1, borderColor: C.border, padding: 14, marginBottom: 0 },
-  addCard: { borderRadius: 14, borderWidth: 1.5, borderColor: C.orange, borderStyle: 'dashed',
+  addCard: { borderRadius: 14, borderWidth: 1.5, borderColor: C.primary, borderStyle: 'dashed',
     padding: 16, alignItems: 'center', flexDirection: 'row', gap: 10, justifyContent: 'center', marginTop: 12 },
 })

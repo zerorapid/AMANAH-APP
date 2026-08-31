@@ -21,7 +21,7 @@ export default function ParentRegister() {
           <Input placeholder="United States" size="$5"
             borderRadius={12} borderColor={C.border} backgroundColor={C.white} />
         </YStack>
-        <Button marginTop={8} backgroundColor={C.orange} color="white" size="$5" borderRadius={14}
+        <Button marginTop={8} backgroundColor={C.primary} color="white" size="$5" borderRadius={14}
           onPress={() => router.push('/(auth)/parent/identity')}>
           Send OTP
         </Button>

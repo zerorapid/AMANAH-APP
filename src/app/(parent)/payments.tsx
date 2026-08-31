@@ -1,13 +1,13 @@
 import { ScrollView, StyleSheet, TouchableOpacity } from 'react-native'
 import { YStack, XStack, Paragraph } from 'tamagui'
-import { QrCode, ArrowRightLeft, CreditCard, ChevronRight } from 'lucide-react-native'
+import { QrCode, ArrowRightLeft, CreditCard, ChevronRight, Zap } from 'lucide-react-native'
 import { SafeAreaView } from 'react-native-safe-area-context'
 import { C } from '../../constants/theme'
 
 const items = [
-  { icon: <QrCode color={C.orange} size={26} />, title: 'Scan & Pay', sub: 'Pay a merchant via QR code' },
-  { icon: <ArrowRightLeft color={C.orange} size={26} />, title: 'Send Money', sub: 'Transfer funds to your children' },
-  { icon: <CreditCard color={C.orange} size={26} />, title: 'Funding Sources', sub: 'Manage linked bank accounts & cards' },
+  { icon: <QrCode color={C.primary} size={26} />, title: 'Scan & Pay', sub: 'Pay a merchant via QR code' },
+  { icon: <ArrowRightLeft color={C.primary} size={26} />, title: 'Send Money', sub: 'Transfer funds to your children' },
+  { icon: <CreditCard color={C.primary} size={26} />, title: 'Funding Sources', sub: 'Manage linked bank accounts & cards' },
 ]
 
 export default function ParentPayments() {
@@ -21,7 +21,7 @@ export default function ParentPayments() {
           {items.map((item) => (
             <TouchableOpacity key={item.title} style={s.card} activeOpacity={0.7}>
               <XStack gap={14} alignItems="center">
-                <YStack backgroundColor={C.orangeLight} padding={12} borderRadius={12}>
+                <YStack backgroundColor={C.primaryLight} padding={12} borderRadius={12}>
                   {item.icon}
                 </YStack>
                 <YStack flex={1}>
@@ -38,14 +38,14 @@ export default function ParentPayments() {
         <Paragraph fontSize={14} fontWeight="bold" color={C.muted} marginTop={28} marginBottom={12}>
           APPROVAL SETTINGS
         </Paragraph>
-        <TouchableOpacity style={[s.card, { backgroundColor: C.orangeLight }]} activeOpacity={0.7}>
+        <TouchableOpacity style={[s.card, { backgroundColor: C.primaryLight }]} activeOpacity={0.7}>
           <XStack gap={14} alignItems="center">
-            <Paragraph fontSize={28}>⚡</Paragraph>
+            <Zap size={28} color={C.primary} />
             <YStack flex={1}>
-              <Paragraph fontSize={15} fontWeight="bold" color={C.orange}>Approve Every Payment</Paragraph>
-              <Paragraph fontSize={13} color={C.orange} opacity={0.8}>Switch approval mode for each child</Paragraph>
+              <Paragraph fontSize={15} fontWeight="bold" color={C.primary}>Approve Every Payment</Paragraph>
+              <Paragraph fontSize={13} color={C.primary} opacity={0.8}>Switch approval mode for each child</Paragraph>
             </YStack>
-            <ChevronRight size={18} color={C.orange} />
+            <ChevronRight size={18} color={C.primary} />
           </XStack>
         </TouchableOpacity>
       </ScrollView>

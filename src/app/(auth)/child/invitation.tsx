@@ -14,16 +14,16 @@ export default function ChildInvitation() {
         <YStack gap={8}>
           <Paragraph fontSize={13} fontWeight="600" color={C.text}>Invitation Code</Paragraph>
           <Input autoCapitalize="characters" placeholder="e.g. ABC-123" size="$6"
-            borderRadius={12} borderColor={C.orange} borderWidth={2}
+            borderRadius={12} borderColor={C.primary} borderWidth={2}
             backgroundColor={C.white} textAlign="center" fontSize={22} letterSpacing={4} />
         </YStack>
-        <XStack backgroundColor={C.orangeLight} borderRadius={12} padding={12} gap={10}>
-          <Paragraph fontSize={16}>📩</Paragraph>
-          <Paragraph color={C.orange} fontSize={13} flex={1}>
+        <XStack backgroundColor={C.primaryLight} borderRadius={12} padding={12} gap={10}>
+          <Mail size={18} color={C.primary} />
+          <Paragraph color={C.primary} fontSize={13} flex={1}>
             Ask your parent to generate a code from their Parent App → Children → Add Child.
           </Paragraph>
         </XStack>
-        <Button backgroundColor={C.orange} color="white" size="$5" borderRadius={14}
+        <Button backgroundColor={C.primary} color="white" size="$5" borderRadius={14}
           onPress={() => router.push('/(auth)/child/register')}>
           Verify Code
         </Button>

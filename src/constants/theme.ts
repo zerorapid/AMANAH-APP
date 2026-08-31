@@ -1,7 +1,7 @@
 export const C = {
-  orange: '#FF6B00',
-  orangeLight: '#FFF0E5',
-  orangeDark: '#CC5600',
+  primary: '#000000',
+  primaryLight: '#F3F4F6',
+  primaryDark: '#000000',
   white: '#FFFFFF',
   bg: '#F8F8F8',
   border: '#E8E8E8',

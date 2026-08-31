@@ -27,10 +27,10 @@ export const useChildStore = create<ChildState>((set, get) => ({
   },
 
   transactions: [
-    { id: 't1', merchant: 'Amazon', amount: -12.5, date: 'Today, 10:42 AM', status: 'completed', category: 'shopping', icon: '🛒' },
-    { id: 't2', merchant: 'Allowance from Dad', amount: 50, date: 'Yesterday', status: 'completed', category: 'allowance', icon: '💰' },
+    { id: 't1', merchant: 'Amazon', amount: -12.5, date: 'Today, 10:42 AM', status: 'completed', category: 'shopping', icon: 'ShoppingCart' },
+    { id: 't2', merchant: 'Allowance from Dad', amount: 50, date: 'Yesterday', status: 'completed', category: 'allowance', icon: 'Wallet' },
     { id: 't3', merchant: "McDonald's", amount: -8, date: 'Aug 24', status: 'completed', category: 'food', icon: '🍔' },
-    { id: 't4', merchant: 'Steam Games', amount: -20, date: 'Aug 23', status: 'blocked', category: 'gaming', icon: '🎮' },
+    { id: 't4', merchant: 'Steam Games', amount: -20, date: 'Aug 23', status: 'blocked', category: 'gaming', icon: 'Gamepad2' },
   ],
 
   requests: [],

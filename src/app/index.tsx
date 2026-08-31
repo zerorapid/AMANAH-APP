@@ -14,11 +14,11 @@ export default function RoleSelector() {
 
         {/* Logo */}
         <YStack alignItems="center" gap={12}>
-          <YStack width={72} height={72} borderRadius={20} backgroundColor={C.orange}
+          <YStack width={72} height={72} borderRadius={20} backgroundColor={C.primary}
             justifyContent="center" alignItems="center">
             <Paragraph fontSize={32} color="white" fontWeight="bold">A</Paragraph>
           </YStack>
-          <H1 color={C.orange} marginTop={8}>Amanah</H1>
+          <H1 color={C.primary} marginTop={8}>Amanah</H1>
           <Paragraph color={C.muted} textAlign="center" fontSize={15}>
             Smart family finance — built on trust.
           </Paragraph>
@@ -36,12 +36,12 @@ export default function RoleSelector() {
             backgroundColor={C.white}
             borderRadius={16}
             borderWidth={2}
-            borderColor={C.orange}
+            borderColor={C.primary}
             padding={20}
           >
             <XStack gap={16} alignItems="center">
-              <YStack backgroundColor={C.orangeLight} padding={12} borderRadius={12}>
-                <Shield color={C.orange} size={26} />
+              <YStack backgroundColor={C.primaryLight} padding={12} borderRadius={12}>
+                <Shield color={C.primary} size={26} />
               </YStack>
               <YStack flex={1}>
                 <Paragraph fontWeight="bold" fontSize={17} color={C.text}>Parent</Paragraph>
@@ -49,7 +49,7 @@ export default function RoleSelector() {
                   Control allowances, limits & approvals
                 </Paragraph>
               </YStack>
-              <Paragraph color={C.orange} fontSize={20}>›</Paragraph>
+              <Paragraph color={C.primary} fontSize={20}>›</Paragraph>
             </XStack>
           </Card>
 
@@ -63,8 +63,8 @@ export default function RoleSelector() {
             padding={20}
           >
             <XStack gap={16} alignItems="center">
-              <YStack backgroundColor={C.orangeLight} padding={12} borderRadius={12}>
-                <User color={C.orange} size={26} />
+              <YStack backgroundColor={C.primaryLight} padding={12} borderRadius={12}>
+                <User color={C.primary} size={26} />
               </YStack>
               <YStack flex={1}>
                 <Paragraph fontWeight="bold" fontSize={17} color={C.text}>Child</Paragraph>

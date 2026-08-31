@@ -7,11 +7,11 @@ import { C } from '../../constants/theme'
 import { useParentStore } from '../../store/parentStore'
 
 const menuItems = [
-  { icon: <CheckCircle color={C.orange} size={20} />, label: 'Approvals & Requests' },
-  { icon: <ShieldAlert color={C.orange} size={20} />, label: 'Spending Controls' },
-  { icon: <Bell color={C.orange} size={20} />, label: 'Notifications' },
-  { icon: <User color={C.orange} size={20} />, label: 'My Profile' },
-  { icon: <Settings color={C.orange} size={20} />, label: 'App Settings' },
+  { icon: <CheckCircle color={C.primary} size={20} />, label: 'Approvals & Requests' },
+  { icon: <ShieldAlert color={C.primary} size={20} />, label: 'Spending Controls' },
+  { icon: <Bell color={C.primary} size={20} />, label: 'Notifications' },
+  { icon: <User color={C.primary} size={20} />, label: 'My Profile' },
+  { icon: <Settings color={C.primary} size={20} />, label: 'App Settings' },
 ]
 
 export default function ParentMore() {
@@ -26,7 +26,7 @@ export default function ParentMore() {
         <View style={s.profileCard}>
           <Avatar circular size="$6">
             <Avatar.Image src={parent.avatar} />
-            <Avatar.Fallback backgroundColor={C.orangeLight} />
+            <Avatar.Fallback backgroundColor={C.primaryLight} />
           </Avatar>
           <YStack flex={1} gap={2}>
             <Paragraph fontSize={18} fontWeight="bold" color={C.white}>{parent.name}</Paragraph>
@@ -73,11 +73,11 @@ export default function ParentMore() {
 const s = StyleSheet.create({
   container: { flex: 1, backgroundColor: C.bg },
   scroll: { padding: 16, paddingBottom: 40 },
-  profileCard: { backgroundColor: C.orange, borderRadius: 16, padding: 20, flexDirection: 'row',
+  profileCard: { backgroundColor: C.primary, borderRadius: 16, padding: 20, flexDirection: 'row',
     gap: 14, alignItems: 'center', marginBottom: 24 },
   badge: { backgroundColor: 'rgba(255,255,255,0.25)', borderRadius: 20, paddingHorizontal: 8,
     paddingVertical: 2, alignSelf: 'flex-start', marginTop: 4 },
   row: { backgroundColor: C.white, borderRadius: 12, padding: 14, flexDirection: 'row',
     alignItems: 'center', borderWidth: 1, borderColor: C.border },
-  iconWrap: { backgroundColor: C.orangeLight, padding: 8, borderRadius: 10 },
+  iconWrap: { backgroundColor: C.primaryLight, padding: 8, borderRadius: 10 },
 })

@@ -13,9 +13,9 @@ export default function ParentSecurity() {
         <Paragraph fontSize={26} fontWeight="bold" color={C.text}>Security Setup</Paragraph>
         <Paragraph color={C.muted} fontSize={14}>Create a PIN to protect your account.</Paragraph>
 
-        <YStack backgroundColor={C.orangeLight} borderRadius={16} padding={20} alignItems="center" gap={8}>
-          <Shield color={C.orange} size={36} />
-          <Paragraph color={C.orange} fontWeight="bold" fontSize={15}>Enter 4-Digit PIN</Paragraph>
+        <YStack backgroundColor={C.primaryLight} borderRadius={16} padding={20} alignItems="center" gap={8}>
+          <Shield color={C.primary} size={36} />
+          <Paragraph color={C.primary} fontWeight="bold" fontSize={15}>Enter 4-Digit PIN</Paragraph>
         </YStack>
 
         <Input
@@ -46,13 +46,13 @@ export default function ParentSecurity() {
         />
 
         <XStack gap={12} alignItems="center" backgroundColor={C.successBg} borderRadius={12} padding={12}>
-          <Paragraph fontSize={18}>💡</Paragraph>
+          <Lightbulb size={18} color={C.primary} />
           <Paragraph color={C.success} fontSize={13} flex={1}>
             Biometric authentication can be enabled after setup in Settings.
           </Paragraph>
         </XStack>
 
-        <Button backgroundColor={C.orange} color="white" size="$5" borderRadius={14}
+        <Button backgroundColor={C.primary} color="white" size="$5" borderRadius={14}
           onPress={() => router.replace('/(parent)')}>
           Complete Setup & Enter App
         </Button>

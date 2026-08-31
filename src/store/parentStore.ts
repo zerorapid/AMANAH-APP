@@ -55,9 +55,9 @@ export const useParentStore = create<ParentState>((set) => ({
   ],
 
   transactions: [
-    { id: 't1', merchant: 'Amazon', amount: -12.5, date: 'Today, 10:42 AM', status: 'completed', category: 'shopping', childId: 'c1', icon: '🛒' },
+    { id: 't1', merchant: 'Amazon', amount: -12.5, date: 'Today, 10:42 AM', status: 'completed', category: 'shopping', childId: 'c1', icon: 'ShoppingCart' },
     { id: 't2', merchant: 'Steam Games', amount: -20, date: 'Aug 24', status: 'blocked', category: 'gaming', childId: 'c1', icon: '🎮' },
-    { id: 't3', merchant: 'Allowance', amount: 50, date: 'Aug 20', status: 'completed', category: 'allowance', childId: 'c2', icon: '💰' },
+    { id: 't3', merchant: 'Allowance', amount: 50, date: 'Aug 20', status: 'completed', category: 'allowance', childId: 'c2', icon: 'Wallet' },
     { id: 't4', merchant: "McDonald's", amount: -8, date: 'Aug 22', status: 'completed', category: 'food', childId: 'c1', icon: '🍔' },
   ],
 
