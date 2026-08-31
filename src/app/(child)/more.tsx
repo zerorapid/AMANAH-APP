@@ -61,7 +61,11 @@ export default function ChildMore() {
             { icon: <ShieldAlert color={C.primary} size={20} />, label: 'Security & PIN' },
             { icon: <User color={C.primary} size={20} />, label: 'My Profile' },
           ].map((item) => (
-            <TouchableOpacity key={item.label} style={s.row} activeOpacity={0.7}>
+            <TouchableOpacity key={item.label} style={s.row} activeOpacity={0.7} onPress={() => {
+    if (item.label === 'Notifications') router.push('/(child)/settings-notifications' as any);
+    else if (item.label === 'Security & PIN') router.push('/(child)/settings-security' as any);
+    else router.push('/(child)/settings-profile' as any);
+  }}>
               <XStack gap={14} alignItems="center" flex={1}>
                 <View style={s.iconWrap}>{item.icon}</View>
                 <Paragraph fontSize={15} fontWeight="600" color={C.text}>{item.label}</Paragraph>

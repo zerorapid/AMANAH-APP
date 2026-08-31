@@ -78,7 +78,7 @@ export default function ParentDashboard() {
 
         {/* Pending Approvals */}
         {pending.length > 0 && (
-          <View style={[s.card, s.warnCard]}>
+          <TouchableOpacity style={[s.card, s.warnCard]} activeOpacity={0.7} onPress={() => router.push("/(parent)/approvals" as any)}>
             <XStack gap={8} alignItems="center" marginBottom={12}>
               <Clock size={16} color={C.warning} />
               <Paragraph fontSize={14} fontWeight="bold" color={C.warning}>
@@ -97,7 +97,7 @@ export default function ParentDashboard() {
                 </XStack>
               </XStack>
             ))}
-          </View>
+          </TouchableOpacity>
         )}
 
         {/* Children */}

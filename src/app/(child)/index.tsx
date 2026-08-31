@@ -64,7 +64,7 @@ export default function ChildWalletHome() {
           <Button flex={1} icon={<QrCode size={16} />} backgroundColor={C.primary} color="white" fontWeight="bold" borderRadius={12} onPress={() => router.push('/(child)/scan')}>
             Scan & Pay
           </Button>
-          <Button onPress={() => alert("This feature is scheduled for backend integration in the next phase.")} flex={1} icon={<Send size={16} />} backgroundColor={C.primaryLight} color={C.primary} fontWeight="bold" borderRadius={12}>
+          <Button onPress={() => router.push("/(child)/request" as any)} flex={1} icon={<Send size={16} />} backgroundColor={C.primaryLight} color={C.primary} fontWeight="bold" borderRadius={12}>
             Request
           </Button>
         </XStack>

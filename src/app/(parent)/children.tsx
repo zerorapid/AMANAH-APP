@@ -5,7 +5,9 @@ import { SafeAreaView } from 'react-native-safe-area-context'
 import { C } from '../../constants/theme'
 import { useParentStore } from '../../store/parentStore'
 
+import { useRouter } from 'expo-router'
 export default function ParentChildren() {
+  const router = useRouter()
   const { children } = useParentStore()
 
   return (

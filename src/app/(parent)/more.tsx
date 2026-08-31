@@ -41,7 +41,13 @@ export default function ParentMore() {
         <Paragraph fontSize={13} fontWeight="600" color={C.muted} marginBottom={10}>ACCOUNT</Paragraph>
         <YStack gap={8} marginBottom={24}>
           {menuItems.map((item) => (
-            <TouchableOpacity key={item.label} style={s.row} activeOpacity={0.7}>
+            <TouchableOpacity key={item.label} style={s.row} activeOpacity={0.7} onPress={() => {
+    if (item.label === 'Approvals & Requests') router.push('/(parent)/approvals' as any);
+    else if (item.label === 'Spending Controls') router.push('/(parent)/settings-security' as any);
+    else if (item.label === 'Notifications') router.push('/(parent)/settings-notifications' as any);
+    else if (item.label === 'My Profile') router.push('/(parent)/settings-profile' as any);
+    else router.push('/(parent)/settings-app' as any);
+  }}>
               <XStack gap={14} alignItems="center" flex={1}>
                 <View style={s.iconWrap}>{item.icon}</View>
                 <Paragraph fontSize={15} fontWeight="600" color={C.text}>{item.label}</Paragraph>
