@@ -2,6 +2,8 @@ import { Mail } from "lucide-react-native";
 import { StyleSheet } from 'react-native'
 import { YStack, XStack, Paragraph, Button, Input } from 'tamagui'
 import { useRouter } from 'expo-router'
+import { ChevronLeft } from 'lucide-react-native'
+import { TouchableOpacity } from 'react-native'
 import { SafeAreaView } from 'react-native-safe-area-context'
 import { C } from '../../../constants/theme'
 
@@ -10,6 +12,9 @@ export default function ChildInvitation() {
   return (
     <SafeAreaView style={s.container}>
       <YStack flex={1} paddingHorizontal={24} paddingTop={48} gap={20}>
+      <TouchableOpacity onPress={() => router.back()} style={{ alignSelf: 'flex-start', padding: 8, marginLeft: -8, marginBottom: 8 }}>
+        <ChevronLeft size={28} color={C.text} />
+      </TouchableOpacity>
         <Paragraph fontSize={26} fontWeight="bold" color={C.text}>Enter Invitation</Paragraph>
         <Paragraph color={C.muted} fontSize={14}>Your parent sent you an invitation code. Enter it below.</Paragraph>
         <YStack gap={8}>

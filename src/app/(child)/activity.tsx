@@ -22,6 +22,13 @@ export default function ChildActivity() {
       <ScrollView contentContainerStyle={s.scroll} showsVerticalScrollIndicator={false}>
         <Paragraph fontSize={20} fontWeight="bold" color={C.text} marginBottom={16}>All Activity</Paragraph>
         <YStack gap={8}>
+          
+          {transactions.length === 0 && (
+            <YStack padding={40} alignItems="center" gap={12} opacity={0.5}>
+              <HelpCircle size={48} color={C.muted} />
+              <Paragraph color={C.muted}>No recent activity.</Paragraph>
+            </YStack>
+          )}
           {transactions.map((tx) => (
             <View key={tx.id} style={s.card}>
               <XStack justifyContent="space-between" alignItems="center">

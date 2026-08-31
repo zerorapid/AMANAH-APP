@@ -2,6 +2,8 @@ import { ScrollView, StyleSheet, View } from 'react-native'
 import { YStack, XStack, Paragraph } from 'tamagui'
 import { SafeAreaView } from 'react-native-safe-area-context'
 import { C } from '../../constants/theme'
+import { useState } from 'react'
+import { TouchableOpacity } from 'react-native'
 import { useParentStore } from '../../store/parentStore'
 import { ShoppingCart, Wallet, Gamepad2, HelpCircle } from "lucide-react-native";
 const getIcon = (name?: string) => {
@@ -16,6 +18,8 @@ const getIcon = (name?: string) => {
 
 export default function ParentTransactions() {
   const { transactions } = useParentStore()
+  const [activeTab, setActiveTab] = useState('All')
+  const filtered = transactions.filter(t => activeTab === 'All' ? true : activeTab === 'Completed' ? t.status === 'completed' : t.status === 'blocked')
 
   return (
     <SafeAreaView style={s.container} edges={['top']}>
@@ -34,7 +38,14 @@ export default function ParentTransactions() {
         </XStack>
 
         <YStack gap={8}>
-          {transactions.map((tx) => (
+          
+          {filtered.length === 0 && (
+            <YStack padding={40} alignItems="center" gap={12} opacity={0.5}>
+              <HelpCircle size={48} color={C.muted} />
+              <Paragraph color={C.muted}>No transactions found.</Paragraph>
+            </YStack>
+          )}
+          {filtered.map((tx) => (
             <View key={tx.id} style={s.card}>
               <XStack justifyContent="space-between" alignItems="center">
                 <XStack gap={12} alignItems="center" flex={1}>
