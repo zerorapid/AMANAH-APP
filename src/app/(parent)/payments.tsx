@@ -10,7 +10,9 @@ const items = [
   { icon: <CreditCard color={C.primary} size={26} />, title: 'Funding Sources', sub: 'Manage linked bank accounts & cards' },
 ]
 
+import { useRouter } from 'expo-router'
 export default function ParentPayments() {
+  const router = useRouter()
   return (
     <SafeAreaView style={s.container} edges={['top']}>
       <ScrollView contentContainerStyle={s.scroll} showsVerticalScrollIndicator={false}>

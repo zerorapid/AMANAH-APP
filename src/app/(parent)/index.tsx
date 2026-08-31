@@ -16,7 +16,9 @@ const getIcon = (name?: string) => {
 };
 
 
+import { useRouter } from "expo-router";
 export default function ParentDashboard() {
+  const router = useRouter();
   const { parent, children, transactions, approvalRequests, approveRequest, declineRequest } = useParentStore()
   const pending = approvalRequests.filter((r) => r.status === 'pending')
 
@@ -64,7 +66,10 @@ export default function ParentDashboard() {
             { label: 'Add Funds', icon: <Plus size={14} color={C.primary} /> },
             { label: 'Top Up', icon: <ArrowDownCircle size={14} color={C.primary} /> }
           ].map((a) => (
-            <TouchableOpacity key={a.label} style={s.quickBtn} activeOpacity={0.7} onPress={() => alert("This feature is scheduled for backend integration in the next phase.")}>
+            <TouchableOpacity key={a.label} style={s.quickBtn} activeOpacity={0.7} onPress={() => {
+                if (a.label === 'Send') router.push('/(parent)/send' as any);
+                else router.push('/(parent)/top-up' as any);
+              }}>
               {a.icon}
               <Paragraph style={s.quickLabel}>{a.label}</Paragraph>
             </TouchableOpacity>
