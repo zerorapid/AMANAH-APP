@@ -1,4 +1,4 @@
-import { ScrollView, StyleSheet, View } from 'react-native'
+import { ScrollView, StyleSheet, View, TouchableOpacity } from "react-native"
 import { YStack, XStack, Paragraph, Button, Card, Avatar, Progress } from 'tamagui'
 import { Bell, Plus, Send, ArrowDownCircle, Clock } from 'lucide-react-native'
 import { SafeAreaView } from 'react-native-safe-area-context'
@@ -64,10 +64,10 @@ export default function ParentDashboard() {
             { label: 'Add Funds', icon: <Plus size={14} color={C.primary} /> },
             { label: 'Top Up', icon: <ArrowDownCircle size={14} color={C.primary} /> }
           ].map((a) => (
-            <View key={a.label} style={s.quickBtn}>
+            <TouchableOpacity key={a.label} style={s.quickBtn} activeOpacity={0.7} onPress={() => alert("This feature is scheduled for backend integration in the next phase.")}>
               {a.icon}
               <Paragraph style={s.quickLabel}>{a.label}</Paragraph>
-            </View>
+            </TouchableOpacity>
           ))}
         </XStack>
 
@@ -98,7 +98,7 @@ export default function ParentDashboard() {
         {/* Children */}
         <XStack justifyContent="space-between" alignItems="center" marginBottom={12}>
           <Paragraph fontSize={16} fontWeight="bold" color={C.text}>Your Children</Paragraph>
-          <Button size="$2" backgroundColor={C.primaryLight} color={C.primary} icon={<Plus size={13} />}>Add</Button>
+          <Button onPress={() => alert("This feature is scheduled for backend integration in the next phase.")} size="$2" backgroundColor={C.primaryLight} color={C.primary} icon={<Plus size={13} />}>Add</Button>
         </XStack>
 
         <YStack gap={12} marginBottom={20}>
@@ -113,7 +113,7 @@ export default function ParentDashboard() {
                   <Paragraph fontSize={15} fontWeight="bold" color={C.primary}>{child.name}</Paragraph>
                   <Paragraph fontSize={13} color={C.muted}>Balance: ${child.balance.toFixed(2)} SAR</Paragraph>
                 </YStack>
-                <Button size="$2" backgroundColor={C.primaryLight} color={C.primary}>Manage</Button>
+                <Button onPress={() => alert("This feature is scheduled for backend integration in the next phase.")} size="$2" backgroundColor={C.primaryLight} color={C.primary}>Manage</Button>
               </XStack>
               <XStack justifyContent="space-between" marginBottom={4}>
                 <Paragraph fontSize={12} color={C.muted}>Monthly spending</Paragraph>

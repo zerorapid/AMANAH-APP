@@ -5,6 +5,16 @@ import { SafeAreaView } from 'react-native-safe-area-context'
 import { useRouter } from 'expo-router'
 import { C } from '../../constants/theme'
 import { useChildStore } from '../../store/childStore'
+import { ShoppingCart, Wallet, Gamepad2, HelpCircle } from 'lucide-react-native'
+
+const getIcon = (name?: string) => {
+  switch(name) {
+    case 'ShoppingCart': return <ShoppingCart size={22} color={C.text} />;
+    case 'Wallet': return <Wallet size={22} color={C.text} />;
+    case 'Gamepad2': return <Gamepad2 size={22} color={C.text} />;
+    default: return <HelpCircle size={22} color={C.text} />;
+  }
+}
 
 export default function ChildWalletHome() {
   const router = useRouter()
@@ -54,7 +64,7 @@ export default function ChildWalletHome() {
           <Button flex={1} icon={<QrCode size={16} />} backgroundColor={C.primary} color="white" fontWeight="bold" borderRadius={12} onPress={() => router.push('/(child)/scan')}>
             Scan & Pay
           </Button>
-          <Button flex={1} icon={<Send size={16} />} backgroundColor={C.primaryLight} color={C.primary} fontWeight="bold" borderRadius={12}>
+          <Button onPress={() => alert("This feature is scheduled for backend integration in the next phase.")} flex={1} icon={<Send size={16} />} backgroundColor={C.primaryLight} color={C.primary} fontWeight="bold" borderRadius={12}>
             Request
           </Button>
         </XStack>
@@ -104,7 +114,7 @@ export default function ChildWalletHome() {
           {transactions.slice(0, 4).map((tx) => (
             <View key={tx.id} style={s.txRow}>
               <XStack gap={12} alignItems="center" flex={1}>
-                <Paragraph fontSize={22}>{tx.icon}</Paragraph>
+                {getIcon(tx.icon)}
                 <YStack flex={1}>
                   <Paragraph fontSize={14} fontWeight="bold" color={C.text}>{tx.merchant}</Paragraph>
                   <Paragraph fontSize={12} color={C.muted}>{tx.date}</Paragraph>
