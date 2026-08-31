@@ -1,4 +1,4 @@
-import { Coffee, Gamepad2 } from "lucide-react-native";
+import { Coffee, Gamepad2, ShoppingCart } from "lucide-react-native";
 import { StyleSheet, View } from 'react-native'
 import { YStack, XStack, Paragraph, Button } from 'tamagui'
 import { QrCode, CheckCircle, XCircle, AlertCircle } from 'lucide-react-native'
@@ -12,7 +12,7 @@ type ScanState = 'idle' | 'scanned' | 'approved' | 'blocked' | 'insufficient' | 
 const DEMO_MERCHANTS = [
   { name: "McDonald's", category: 'food', amount: 12, icon: 'Coffee' },
   { name: 'Steam Games', category: 'gaming', amount: 15, icon: 'Gamepad2' },
-  { name: 'Amazon', category: 'shopping', amount: 25, icon: '🛒' },
+  { name: 'Amazon', category: 'shopping', amount: 25, icon: 'ShoppingCart' },
 ]
 
 export default function ChildScan() {
@@ -81,7 +81,7 @@ export default function ChildScan() {
           <YStack flex={1} justifyContent="center" gap={20}>
             <View style={s.card}>
               <XStack gap={16} alignItems="center">
-                <Paragraph fontSize={36}>{merchant.icon}</Paragraph>
+                {merchant.icon === 'Coffee' ? <Coffee size={36} color={C.text}/> : merchant.icon === 'Gamepad2' ? <Gamepad2 size={36} color={C.text}/> : <ShoppingCart size={36} color={C.text}/>}
                 <YStack>
                   <Paragraph fontWeight="bold" fontSize={18} color={C.text}>{merchant.name}</Paragraph>
                   <Paragraph fontSize={14} color={C.muted}>
@@ -130,9 +130,9 @@ export default function ChildScan() {
             </Paragraph>
 
             <Paragraph color={C.muted} textAlign="center" fontSize={15} lineHeight={22} paddingHorizontal={20}>
-              {scanState === 'approved' && `$${merchant.amount.toFixed(2)} SAR paid to ${merchant.name} SAR`}
-              {scanState === 'blocked' && `${merchant.name} SAR is in a restricted category (${merchant.category} SAR).\nContact your parent to unlock.`}
-              {scanState === 'insufficient' && `You need $${merchant.amount.toFixed(2)} SAR but only have $${child.balance.toFixed(2)} SAR.`}
+              {scanState === 'approved' && `${merchant.amount.toFixed(2)} SAR paid to ${merchant.name}`}
+              {scanState === 'blocked' && `${merchant.name} is in a restricted category (${merchant.category}).\nContact your parent to unlock.`}
+              {scanState === 'insufficient' && `You need ${merchant.amount.toFixed(2)} SAR but only have ${child.balance.toFixed(2)} SAR.`}
               {scanState === 'pending' && `A request has been sent to your parent.\nYou'll be notified when they respond.`}
             </Paragraph>
 

@@ -37,9 +37,9 @@ export default function ChildMore() {
         </Paragraph>
         <View style={[s.card, { marginBottom: 20 }]}>
           {[
-            { label: 'Daily Limit', value: `$${child.dailyLimit} SAR.00`, color: C.text },
-            { label: 'Monthly Limit', value: `$${child.monthlyLimit} SAR.00`, color: C.text },
-            { label: 'Per Transaction', value: `$${child.perTransactionLimit} SAR.00`, color: C.text },
+            { label: 'Daily Limit', value: `${child.dailyLimit}.00 SAR`, color: C.text },
+            { label: 'Monthly Limit', value: `${child.monthlyLimit}.00 SAR`, color: C.text },
+            { label: 'Per Transaction', value: `${child.perTransactionLimit}.00 SAR`, color: C.text },
             { label: 'Payment Mode', value: child.paymentMode === 'auto' ? 'Auto-Approved ✓' : 'Parent Approval Required', color: child.paymentMode === 'auto' ? C.success : C.warning },
             { label: 'Restricted', value: child.restrictedCategories.join(', '), color: C.error },
           ].map((row, i, arr) => (
