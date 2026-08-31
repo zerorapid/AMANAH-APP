@@ -1,3 +1,4 @@
+import { Coffee, Gamepad2 } from "lucide-react-native";
 import { StyleSheet, View } from 'react-native'
 import { YStack, XStack, Paragraph, Button } from 'tamagui'
 import { QrCode, CheckCircle, XCircle, AlertCircle } from 'lucide-react-native'

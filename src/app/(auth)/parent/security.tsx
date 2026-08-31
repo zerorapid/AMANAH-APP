@@ -1,3 +1,4 @@
+import { Lightbulb } from "lucide-react-native";
 import { StyleSheet } from 'react-native'
 import { YStack, XStack, Paragraph, Button, Input } from 'tamagui'
 import { useRouter } from 'expo-router'
