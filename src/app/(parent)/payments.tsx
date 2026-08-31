@@ -21,7 +21,7 @@ export default function ParentPayments() {
         </Paragraph>
         <YStack gap={12}>
           {items.map((item) => (
-            <TouchableOpacity key={item.title} style={s.card} activeOpacity={0.7}>
+            <TouchableOpacity key={item.title} style={s.card} activeOpacity={0.7} onPress={() => { if (item.title === "Send Money") router.push("/(parent)/send" as any); else if (item.title === "Funding Sources") router.push("/(parent)/top-up" as any); else alert("Coming soon"); }}>
               <XStack gap={14} alignItems="center">
                 <YStack backgroundColor={C.primaryLight} padding={12} borderRadius={12}>
                   {item.icon}
