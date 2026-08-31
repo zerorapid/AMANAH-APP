@@ -17,7 +17,7 @@ export default function ParentChildren() {
       <ScrollView contentContainerStyle={s.scroll} showsVerticalScrollIndicator={false}>
         <XStack justifyContent="space-between" alignItems="center" marginBottom={16}>
           <Paragraph fontSize={20} fontWeight="bold" color={C.text}>Manage Children</Paragraph>
-          <Button onPress={() => setOpen(true)} size="$3" icon={<Plus size={14} />} backgroundColor={C.primary} color="white" borderRadius={10}>
+          <Button pressStyle={{ scale: 0.97, opacity: 0.8 }} onPress={() => setOpen(true)} size="$3" icon={<Plus size={14} />} backgroundColor={C.primary} color="white" borderRadius={10}>
             Add Child
           </Button>
         </XStack>
@@ -58,7 +58,7 @@ export default function ParentChildren() {
               <Paragraph fontSize={15} fontWeight="bold" color={C.text}>Leo</Paragraph>
               <Paragraph fontSize={13} color={C.muted}>Invitation sent · Code: XYZ-789</Paragraph>
             </YStack>
-            <Button onPress={() => setOpen(true)} size="$2" backgroundColor={C.primaryLight} color={C.primary}>Resend</Button>
+            <Button pressStyle={{ scale: 0.97, opacity: 0.8 }} onPress={() => setOpen(true)} size="$2" backgroundColor={C.primaryLight} color={C.primary}>Resend</Button>
           </XStack>
         </View>
 
@@ -80,7 +80,7 @@ export default function ParentChildren() {
             <YStack backgroundColor={C.primaryLight} padding={20} borderRadius={16} width="100%" alignItems="center" marginTop={10}>
               <H2 fontWeight="bold" color={C.primary} letterSpacing={4}>XYZ-789</H2>
             </YStack>
-            <Button marginTop={20} backgroundColor={C.primary} color="white" size="$5" borderRadius={14} width="100%" onPress={() => setOpen(false)}>
+            <Button pressStyle={{ scale: 0.97, opacity: 0.8 }} marginTop={20} backgroundColor={C.primary} color="white" size="$5" borderRadius={14} width="100%" onPress={() => setOpen(false)}>
               Done
             </Button>
           </YStack>

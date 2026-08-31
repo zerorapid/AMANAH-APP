@@ -58,7 +58,7 @@ export default function ParentSecurity() {
           </Paragraph>
         </XStack>
 
-        <Button backgroundColor={C.primary} color="white" size="$5" borderRadius={14}
+        <Button pressStyle={{ scale: 0.97, opacity: 0.8 }} backgroundColor={C.primary} color="white" size="$5" borderRadius={14}
           onPress={() => router.replace('/(parent)')}>
           Complete Setup & Enter App
         </Button>

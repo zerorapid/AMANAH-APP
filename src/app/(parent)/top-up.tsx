@@ -51,7 +51,7 @@ export default function TopUpScreen() {
           </View>
         </YStack>
 
-        <Button marginTop={16} backgroundColor={C.primary} color="white" size="$5" borderRadius={14}
+        <Button pressStyle={{ scale: 0.97, opacity: 0.8 }} marginTop={16} backgroundColor={C.primary} color="white" size="$5" borderRadius={14}
           onPress={handleTopUp}>
           Authorize Payment
         </Button>

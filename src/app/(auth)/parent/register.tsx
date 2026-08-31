@@ -38,7 +38,7 @@ export default function ParentRegister() {
             </YStack>
           </YStack>
           
-          <Button backgroundColor={C.primary} color="white" size="$5" borderRadius={14} onPress={handleNext}>
+          <Button pressStyle={{ scale: 0.97, opacity: 0.8 }} backgroundColor={C.primary} color="white" size="$5" borderRadius={14} onPress={handleNext}>
             Send OTP
           </Button>
         </ScrollView>

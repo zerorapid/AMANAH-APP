@@ -43,8 +43,8 @@ export default function ApprovalsQueue() {
                   "{r.reason}"
                 </Paragraph>
                 <XStack gap={12}>
-                  <Button flex={1} backgroundColor={C.errorBg} color={C.error} borderRadius={12} icon={<X size={16}/>} onPress={() => declineRequest(r.id)}>Decline</Button>
-                  <Button flex={1} backgroundColor={C.success} color="white" borderRadius={12} icon={<Check size={16}/>} onPress={() => approveRequest(r.id)}>Approve</Button>
+                  <Button pressStyle={{ scale: 0.97, opacity: 0.8 }} flex={1} backgroundColor={C.errorBg} color={C.error} borderRadius={12} icon={<X size={16}/>} onPress={() => declineRequest(r.id)}>Decline</Button>
+                  <Button pressStyle={{ scale: 0.97, opacity: 0.8 }} flex={1} backgroundColor={C.success} color="white" borderRadius={12} icon={<Check size={16}/>} onPress={() => approveRequest(r.id)}>Approve</Button>
                 </XStack>
               </YStack>
             ))}

@@ -92,8 +92,8 @@ export default function ParentDashboard() {
                   <Paragraph fontSize={12} color={C.muted}>${r.amount.toFixed(2)} SAR · {r.createdAt}</Paragraph>
                 </YStack>
                 <XStack gap={8}>
-                  <Button size="$2" backgroundColor={C.success} color="white" onPress={() => approveRequest(r.id)}>✓</Button>
-                  <Button size="$2" backgroundColor={C.error} color="white" onPress={() => declineRequest(r.id)}>✗</Button>
+                  <Button pressStyle={{ scale: 0.97, opacity: 0.8 }} size="$2" backgroundColor={C.success} color="white" onPress={() => approveRequest(r.id)}>✓</Button>
+                  <Button pressStyle={{ scale: 0.97, opacity: 0.8 }} size="$2" backgroundColor={C.error} color="white" onPress={() => declineRequest(r.id)}>✗</Button>
                 </XStack>
               </XStack>
             ))}
@@ -103,7 +103,7 @@ export default function ParentDashboard() {
         {/* Children */}
         <XStack justifyContent="space-between" alignItems="center" marginBottom={12}>
           <Paragraph fontSize={16} fontWeight="bold" color={C.text}>Your Children</Paragraph>
-          <Button onPress={() => router.push("/(parent)/children" as any)} size="$2" backgroundColor={C.primaryLight} color={C.primary} icon={<Plus size={13} />}>Add</Button>
+          <Button pressStyle={{ scale: 0.97, opacity: 0.8 }} onPress={() => router.push("/(parent)/children" as any)} size="$2" backgroundColor={C.primaryLight} color={C.primary} icon={<Plus size={13} />}>Add</Button>
         </XStack>
 
         <YStack gap={12} marginBottom={20}>
@@ -118,7 +118,7 @@ export default function ParentDashboard() {
                   <Paragraph fontSize={15} fontWeight="bold" color={C.primary}>{child.name}</Paragraph>
                   <Paragraph fontSize={13} color={C.muted}>Balance: ${child.balance.toFixed(2)} SAR</Paragraph>
                 </YStack>
-                <Button onPress={() => router.push("/(parent)/child-details" as any)} size="$2" backgroundColor={C.primaryLight} color={C.primary}>Manage</Button>
+                <Button pressStyle={{ scale: 0.97, opacity: 0.8 }} onPress={() => router.push("/(parent)/child-details" as any)} size="$2" backgroundColor={C.primaryLight} color={C.primary}>Manage</Button>
               </XStack>
               <XStack justifyContent="space-between" marginBottom={4}>
                 <Paragraph fontSize={12} color={C.muted}>Monthly spending</Paragraph>

@@ -32,7 +32,7 @@ export default function RequestFunds() {
             borderRadius={12} borderColor={C.border} backgroundColor={C.white} />
         </YStack>
 
-        <Button marginTop={16} backgroundColor={C.primary} color="white" size="$5" borderRadius={14}
+        <Button pressStyle={{ scale: 0.97, opacity: 0.8 }} marginTop={16} backgroundColor={C.primary} color="white" size="$5" borderRadius={14}
           icon={<Send size={18} />} onPress={() => { alert("Request sent successfully!"); router.back(); }}>
           Send Request to Parent
         </Button>

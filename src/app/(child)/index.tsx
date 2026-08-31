@@ -61,10 +61,10 @@ export default function ChildWalletHome() {
 
         {/* Quick Actions */}
         <XStack gap={12} marginBottom={20}>
-          <Button flex={1} icon={<QrCode size={16} />} backgroundColor={C.primary} color="white" fontWeight="bold" borderRadius={12} onPress={() => router.push('/(child)/scan')}>
+          <Button pressStyle={{ scale: 0.97, opacity: 0.8 }} flex={1} icon={<QrCode size={16} />} backgroundColor={C.primary} color="white" fontWeight="bold" borderRadius={12} onPress={() => router.push('/(child)/scan')}>
             Scan & Pay
           </Button>
-          <Button onPress={() => router.push("/(child)/request" as any)} flex={1} icon={<Send size={16} />} backgroundColor={C.primaryLight} color={C.primary} fontWeight="bold" borderRadius={12}>
+          <Button pressStyle={{ scale: 0.97, opacity: 0.8 }} onPress={() => router.push("/(child)/request" as any)} flex={1} icon={<Send size={16} />} backgroundColor={C.primaryLight} color={C.primary} fontWeight="bold" borderRadius={12}>
             Request
           </Button>
         </XStack>
@@ -107,7 +107,7 @@ export default function ChildWalletHome() {
         {/* Recent Activity */}
         <XStack justifyContent="space-between" alignItems="center" marginBottom={12}>
           <Paragraph fontSize={16} fontWeight="bold" color={C.text}>Recent Activity</Paragraph>
-          <Button size="$2" backgroundColor="transparent" color={C.primary} onPress={() => router.push('/(child)/activity')}>View All</Button>
+          <Button pressStyle={{ scale: 0.97, opacity: 0.8 }} size="$2" backgroundColor="transparent" color={C.primary} onPress={() => router.push('/(child)/activity')}>View All</Button>
         </XStack>
 
         <YStack gap={8}>

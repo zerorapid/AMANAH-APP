@@ -22,7 +22,7 @@ export default function ChildSecurity() {
         <Input keyboardType="numeric" secureTextEntry maxLength={4}
           placeholder="Confirm PIN" size="$6" borderRadius={12} borderColor={C.border}
           backgroundColor={C.white} textAlign="center" fontSize={28} letterSpacing={16} />
-        <Button marginTop={8} backgroundColor={C.primary} color="white" size="$5" borderRadius={14}
+        <Button pressStyle={{ scale: 0.97, opacity: 0.8 }} marginTop={8} backgroundColor={C.primary} color="white" size="$5" borderRadius={14}
           onPress={() => router.replace('/(child)')}>
           Go to My Wallet
         </Button>

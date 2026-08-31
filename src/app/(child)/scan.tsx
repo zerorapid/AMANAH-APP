@@ -27,7 +27,7 @@ export default function ScannerScreen() {
         </View>
 
         <View style={s.footer}>
-          <Button backgroundColor={C.primary} color="white" size="$5" borderRadius={14} onPress={() => {
+          <Button pressStyle={{ scale: 0.97, opacity: 0.8 }} backgroundColor={C.primary} color="white" size="$5" borderRadius={14} onPress={() => {
             alert('Scan successful! Payment processing...');
             router.back();
           }}>

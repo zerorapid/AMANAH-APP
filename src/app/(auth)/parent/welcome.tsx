@@ -25,7 +25,7 @@ export default function ParentWelcome() {
         <Paragraph color={C.muted} textAlign="center" fontSize={15} lineHeight={22}>
           Take control of your family's finances. Set allowances, limits, and approve your children's spending.
         </Paragraph>
-        <Button
+        <Button pressStyle={{ scale: 0.97, opacity: 0.9 }}
           marginTop={16}
           width="100%"
           backgroundColor={C.primary}
@@ -36,7 +36,7 @@ export default function ParentWelcome() {
         >
           Get Started
         </Button>
-        <Button
+        <Button pressStyle={{ scale: 0.97, opacity: 0.9 }}
           width="100%"
           backgroundColor="transparent"
           color={C.primary}

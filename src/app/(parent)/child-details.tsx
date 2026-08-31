@@ -50,7 +50,7 @@ export default function ChildDetails() {
             <Input keyboardType="numeric" value={monthly} onChangeText={setMonthly} size="$5" borderRadius={12} focusStyle={{ borderColor: C.primary }} />
           </YStack>
 
-          <Button marginTop={16} backgroundColor={C.primary} color="white" size="$5" borderRadius={14} onPress={handleSave}>
+          <Button pressStyle={{ scale: 0.97, opacity: 0.8 }} marginTop={16} backgroundColor={C.primary} color="white" size="$5" borderRadius={14} onPress={handleSave}>
             Save Changes
           </Button>
         </YStack>

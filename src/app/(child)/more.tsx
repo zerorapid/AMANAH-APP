@@ -75,7 +75,7 @@ export default function ChildMore() {
           ))}
         </YStack>
 
-        <Button
+        <Button pressStyle={{ scale: 0.97, opacity: 0.8 }}
           icon={<LogOut size={18} />}
           backgroundColor={C.errorBg}
           color={C.error}

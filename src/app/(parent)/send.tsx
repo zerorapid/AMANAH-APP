@@ -76,7 +76,7 @@ export default function SendMoneyScreen() {
             borderRadius={12} borderColor={C.border} backgroundColor={C.white} focusStyle={{ borderColor: C.primary }} />
         </YStack>
 
-        <Button marginTop={16} backgroundColor={C.primary} color="white" size="$5" borderRadius={14}
+        <Button pressStyle={{ scale: 0.97, opacity: 0.8 }} marginTop={16} backgroundColor={C.primary} color="white" size="$5" borderRadius={14}
           icon={<SendIcon size={18} />} onPress={handleSend}>
           Confirm Transfer
         </Button>
