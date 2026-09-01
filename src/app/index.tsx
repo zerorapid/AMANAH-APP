@@ -14,7 +14,7 @@ export default function RoleSelector() {
 
         {/* Logo */}
         <YStack alignItems="center" gap={12}>
-          <YStack width={72} height={72} borderRadius={20} backgroundColor={C.primary}
+          <YStack width={72} height={72} borderRadius={10} backgroundColor={C.primary}
             justifyContent="center" alignItems="center">
             <Paragraph fontSize={32} color="white" fontWeight="bold">A</Paragraph>
           </YStack>
@@ -34,13 +34,13 @@ export default function RoleSelector() {
             onPress={() => router.push('/(auth)/parent/welcome')}
             pressStyle={{ opacity: 0.8, scale: 0.98 }}
             backgroundColor={C.white}
-            borderRadius={16}
+            borderRadius={8}
             borderWidth={2}
             borderColor={C.primary}
             padding={20}
           >
             <XStack gap={16} alignItems="center">
-              <YStack backgroundColor={C.primaryLight} padding={12} borderRadius={12}>
+              <YStack backgroundColor={C.primaryLight} padding={12} borderRadius={8}>
                 <Shield color={C.primary} size={26} />
               </YStack>
               <YStack flex={1}>
@@ -57,13 +57,13 @@ export default function RoleSelector() {
             onPress={() => router.push('/(auth)/child/welcome')}
             pressStyle={{ opacity: 0.8, scale: 0.98 }}
             backgroundColor={C.white}
-            borderRadius={16}
+            borderRadius={8}
             borderWidth={1.5}
             borderColor={C.border}
             padding={20}
           >
             <XStack gap={16} alignItems="center">
-              <YStack backgroundColor={C.primaryLight} padding={12} borderRadius={12}>
+              <YStack backgroundColor={C.primaryLight} padding={12} borderRadius={8}>
                 <User color={C.primary} size={26} />
               </YStack>
               <YStack flex={1}>

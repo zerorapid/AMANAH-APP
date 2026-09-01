@@ -31,7 +31,7 @@ export default function ParentWelcome() {
           backgroundColor={C.primary}
           color="white"
           size="$5"
-          borderRadius={14}
+          borderRadius={6}
           onPress={() => router.push('/(auth)/parent/register')}
         >
           Get Started
@@ -41,7 +41,7 @@ export default function ParentWelcome() {
           backgroundColor="transparent"
           color={C.primary}
           size="$4"
-          borderRadius={14}
+          borderRadius={6}
           borderWidth={1.5}
           borderColor={C.primary}
           onPress={() => router.push('/(parent)')}

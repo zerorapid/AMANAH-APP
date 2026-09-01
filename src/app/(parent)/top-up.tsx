@@ -38,7 +38,7 @@ export default function TopUpScreen() {
         <YStack gap={8}>
           <Paragraph fontSize={13} fontWeight="600" color={C.text}>Amount (SAR)</Paragraph>
           <Input keyboardType="numeric" placeholder="100.00" value={amount} onChangeText={setAmount} size="$6" fontSize={24} fontWeight="bold"
-            borderRadius={12} borderColor={C.border} backgroundColor={C.white} focusStyle={{ borderColor: C.primary }} />
+            borderRadius={8} borderColor={C.border} backgroundColor={C.white} focusStyle={{ borderColor: C.primary }} />
         </YStack>
 
         <YStack gap={8}>
@@ -51,7 +51,7 @@ export default function TopUpScreen() {
           </View>
         </YStack>
 
-        <Button pressStyle={{ scale: 0.97, opacity: 0.8 }} marginTop={16} backgroundColor={C.primary} color="white" size="$5" borderRadius={14}
+        <Button pressStyle={{ scale: 0.97, opacity: 0.8 }} marginTop={16} backgroundColor={C.primary} color="white" size="$5" borderRadius={6}
           onPress={handleTopUp}>
           Authorize Payment
         </Button>
@@ -61,5 +61,5 @@ export default function TopUpScreen() {
 }
 const s = StyleSheet.create({ 
   container: { flex: 1, backgroundColor: C.bg },
-  dropdown: { backgroundColor: C.white, borderWidth: 1, borderColor: C.border, borderRadius: 12, padding: 16 }
+  dropdown: { backgroundColor: C.white, borderWidth: 1, borderColor: C.border, borderRadius: 8, padding: 16 }
 })

@@ -1,12 +1,22 @@
 import { StyleSheet, TouchableOpacity, ScrollView } from 'react-native'
 import { YStack, XStack, Paragraph, Switch } from 'tamagui'
 import { useRouter } from 'expo-router'
+import { useState } from 'react'
 import { SafeAreaView } from 'react-native-safe-area-context'
 import { ChevronLeft } from 'lucide-react-native'
 import { C } from '../../constants/theme'
 
 export default function GenSettings() {
   const router = useRouter()
+  // Generate state for each option
+  const [states, setStates] = useState([true,true,false])
+  
+  const toggle = (index: number) => {
+    const newStates = [...states];
+    newStates[index] = !newStates[index];
+    setStates(newStates);
+  }
+
   return (
     <SafeAreaView style={s.container}>
       <ScrollView contentContainerStyle={{ paddingHorizontal: 24, paddingTop: 20, paddingBottom: 40 }}>
@@ -20,10 +30,10 @@ export default function GenSettings() {
         </YStack>
 
         <YStack gap={12}>
-          {[1, 2, 3].map(i => (
+          {["Push Notifications","Spend Alerts","Goal Reminders"].map((opt, i) => (
             <XStack key={i} style={s.card} justifyContent="space-between" alignItems="center">
-              <Paragraph fontSize={15} fontWeight="600" color={C.text}>Setting Option {i}</Paragraph>
-              <Switch size="$3" checked={i !== 2} backgroundColor={i !== 2 ? C.primary : C.border}>
+              <Paragraph fontSize={15} fontWeight="600" color={C.text}>{opt}</Paragraph>
+              <Switch size="$3" checked={states[i]} onCheckedChange={() => toggle(i)} backgroundColor={states[i] ? C.primary : C.border}>
                 <Switch.Thumb backgroundColor="white" />
               </Switch>
             </XStack>
@@ -35,5 +45,5 @@ export default function GenSettings() {
 }
 const s = StyleSheet.create({ 
   container: { flex: 1, backgroundColor: C.bg },
-  card: { backgroundColor: C.white, borderRadius: 12, borderWidth: 1, borderColor: C.border, padding: 16 }
+  card: { backgroundColor: C.white, borderRadius: 8, borderWidth: 1, borderColor: C.border, padding: 16 }
 })

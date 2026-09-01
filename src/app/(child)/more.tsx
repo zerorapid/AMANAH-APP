@@ -80,7 +80,7 @@ export default function ChildMore() {
           backgroundColor={C.errorBg}
           color={C.error}
           size="$4"
-          borderRadius={12}
+          borderRadius={8}
           onPress={() => router.replace('/')}
         >
           Logout
@@ -93,13 +93,13 @@ export default function ChildMore() {
 const s = StyleSheet.create({
   container: { flex: 1, backgroundColor: C.bg },
   scroll: { padding: 16, paddingBottom: 40 },
-  profileCard: { backgroundColor: C.primary, borderRadius: 16, padding: 20, flexDirection: 'row',
+  profileCard: { backgroundColor: C.primary, borderRadius: 8, padding: 20, flexDirection: 'row',
     gap: 14, alignItems: 'center', marginBottom: 24 },
-  badge: { backgroundColor: 'rgba(255,255,255,0.25)', borderRadius: 20, paddingHorizontal: 8,
+  badge: { backgroundColor: 'rgba(255,255,255,0.25)', borderRadius: 10, paddingHorizontal: 8,
     paddingVertical: 2, alignSelf: 'flex-start', marginTop: 2 },
-  card: { backgroundColor: C.white, borderRadius: 14, borderWidth: 1, borderColor: C.border, paddingHorizontal: 14 },
+  card: { backgroundColor: C.white, borderRadius: 6, borderWidth: 1, borderColor: C.border, paddingHorizontal: 14 },
   divider: { height: 1, backgroundColor: C.border },
-  row: { backgroundColor: C.white, borderRadius: 12, padding: 14, flexDirection: 'row',
+  row: { backgroundColor: C.white, borderRadius: 8, padding: 14, flexDirection: 'row',
     alignItems: 'center', borderWidth: 1, borderColor: C.border },
   iconWrap: { backgroundColor: C.primaryLight, padding: 8, borderRadius: 10 },
 })

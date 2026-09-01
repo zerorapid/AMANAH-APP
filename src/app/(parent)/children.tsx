@@ -17,9 +17,7 @@ export default function ParentChildren() {
       <ScrollView contentContainerStyle={s.scroll} showsVerticalScrollIndicator={false}>
         <XStack justifyContent="space-between" alignItems="center" marginBottom={16}>
           <Paragraph fontSize={20} fontWeight="bold" color={C.text}>Manage Children</Paragraph>
-          <Button pressStyle={{ scale: 0.97, opacity: 0.8 }} onPress={() => setOpen(true)} size="$3" icon={<Plus size={14} />} backgroundColor={C.primary} color="white" borderRadius={10}>
-            Add Child
-          </Button>
+          
         </XStack>
 
         <Paragraph fontSize={13} fontWeight="600" color={C.muted} marginBottom={10}>
@@ -62,7 +60,7 @@ export default function ParentChildren() {
           </XStack>
         </View>
 
-        <TouchableOpacity style={s.addCard} activeOpacity={0.7}>
+        <TouchableOpacity style={s.addCard} activeOpacity={0.7} onPress={() => setOpen(true)}>
           <Plus size={20} color={C.primary} />
           <Paragraph fontSize={15} color={C.primary} fontWeight="600">Invite Another Child</Paragraph>
         </TouchableOpacity>
@@ -77,10 +75,10 @@ export default function ParentChildren() {
             <Paragraph color={C.muted} textAlign="center">
               Give your child this unique code. They will enter it during their registration to link to your wallet.
             </Paragraph>
-            <YStack backgroundColor={C.primaryLight} padding={20} borderRadius={16} width="100%" alignItems="center" marginTop={10}>
+            <YStack backgroundColor={C.primaryLight} padding={20} borderRadius={8} width="100%" alignItems="center" marginTop={10}>
               <H2 fontWeight="bold" color={C.primary} letterSpacing={4}>XYZ-789</H2>
             </YStack>
-            <Button pressStyle={{ scale: 0.97, opacity: 0.8 }} marginTop={20} backgroundColor={C.primary} color="white" size="$5" borderRadius={14} width="100%" onPress={() => setOpen(false)}>
+            <Button pressStyle={{ scale: 0.97, opacity: 0.8 }} marginTop={20} backgroundColor={C.primary} color="white" size="$5" borderRadius={6} width="100%" onPress={() => setOpen(false)}>
               Done
             </Button>
           </YStack>
@@ -95,7 +93,7 @@ export default function ParentChildren() {
 const s = StyleSheet.create({
   container: { flex: 1, backgroundColor: C.white },
   scroll: { padding: 16, paddingBottom: 40 },
-  card: { backgroundColor: C.white, borderRadius: 14, borderWidth: 1, borderColor: C.border, padding: 14, marginBottom: 0 },
-  addCard: { borderRadius: 14, borderWidth: 1.5, borderColor: C.primary, borderStyle: 'dashed',
+  card: { backgroundColor: C.white, borderRadius: 6, borderWidth: 1, borderColor: C.border, padding: 14, marginBottom: 0 },
+  addCard: { borderRadius: 6, borderWidth: 1.5, borderColor: C.primary, borderStyle: 'dashed',
     padding: 16, alignItems: 'center', flexDirection: 'row', gap: 10, justifyContent: 'center', marginTop: 12 },
 })

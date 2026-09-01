@@ -29,22 +29,22 @@ export default function ParentIdentity() {
             <YStack gap={8}>
               <Paragraph fontSize={14} fontWeight="600" color={C.text}>Full Name</Paragraph>
               <Input value={name} onChangeText={setName} placeholder="John Doe" size="$5"
-                borderRadius={12} borderColor={C.border} backgroundColor={C.white} focusStyle={{ borderColor: C.primary }} />
+                borderRadius={8} borderColor={C.border} backgroundColor={C.white} focusStyle={{ borderColor: C.primary }} />
             </YStack>
             <YStack gap={8}>
               <Paragraph fontSize={14} fontWeight="600" color={C.text}>Email Address</Paragraph>
               <Input placeholder="john@example.com" keyboardType="email-address" size="$5"
-                borderRadius={12} borderColor={C.border} backgroundColor={C.white} focusStyle={{ borderColor: C.primary }} />
+                borderRadius={8} borderColor={C.border} backgroundColor={C.white} focusStyle={{ borderColor: C.primary }} />
             </YStack>
             <YStack gap={8}>
               <Paragraph fontSize={14} fontWeight="600" color={C.text}>Date of Birth</Paragraph>
               {/* Mock Date Picker UI */}
               <Input placeholder="MM/DD/YYYY" size="$5"
-                borderRadius={12} borderColor={C.border} backgroundColor={C.white} focusStyle={{ borderColor: C.primary }} />
+                borderRadius={8} borderColor={C.border} backgroundColor={C.white} focusStyle={{ borderColor: C.primary }} />
             </YStack>
           </YStack>
           
-          <Button pressStyle={{ scale: 0.97, opacity: 0.8 }} backgroundColor={C.primary} color="white" size="$5" borderRadius={14} onPress={handleNext}>
+          <Button pressStyle={{ scale: 0.97, opacity: 0.8 }} backgroundColor={C.primary} color="white" size="$5" borderRadius={6} onPress={handleNext}>
             Continue
           </Button>
         </ScrollView>

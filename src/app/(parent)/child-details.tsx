@@ -1,19 +1,30 @@
 import { StyleSheet, TouchableOpacity, ScrollView, View } from 'react-native'
-import { YStack, Paragraph, Button, Input } from 'tamagui'
+import { YStack, XStack, Paragraph, Button, Input } from 'tamagui'
 import { useRouter } from 'expo-router'
 import { useState } from 'react'
 import { SafeAreaView } from 'react-native-safe-area-context'
-import { ChevronLeft, User } from 'lucide-react-native'
+import { ChevronLeft, User, HelpCircle, ShoppingCart, Wallet, Gamepad2 } from 'lucide-react-native'
 import { C } from '../../constants/theme'
 import { useParentStore } from '../../store/parentStore'
 
+const getIcon = (name?: string) => {
+  switch(name) {
+    case "ShoppingCart": return <ShoppingCart size={24} color={C.text} />;
+    case "Wallet": return <Wallet size={24} color={C.text} />;
+    case "Gamepad2": return <Gamepad2 size={24} color={C.text} />;
+    default: return <HelpCircle size={24} color={C.text} />;
+  }
+};
+
 export default function ChildDetails() {
   const router = useRouter()
-  const { children, updateChild } = useParentStore()
+  const { children, updateChild, transactions } = useParentStore()
   const child = children[0] // Mocking the first child
 
   const [daily, setDaily] = useState(child.dailyLimit.toString())
   const [monthly, setMonthly] = useState(child.monthlyLimit.toString())
+
+  const childTx = transactions.filter(t => t.childId === child.id)
 
   const handleSave = () => {
     updateChild(child.id, {
@@ -39,23 +50,54 @@ export default function ChildDetails() {
           <Paragraph color={C.muted} fontSize={14}>Balance: {child.balance.toFixed(2)} SAR</Paragraph>
         </YStack>
 
-        <YStack gap={16}>
+        <YStack gap={16} marginBottom={32}>
+          <Paragraph fontSize={16} fontWeight="bold" color={C.text}>Spending Limits</Paragraph>
+          
           <YStack gap={8}>
             <Paragraph fontSize={13} fontWeight="600" color={C.text}>Daily Limit (SAR)</Paragraph>
-            <Input keyboardType="numeric" value={daily} onChangeText={setDaily} size="$5" borderRadius={12} focusStyle={{ borderColor: C.primary }} />
+            <Input keyboardType="numeric" value={daily} onChangeText={setDaily} size="$5" borderRadius={8} focusStyle={{ borderColor: C.primary }} backgroundColor={C.white} borderColor={C.border} />
           </YStack>
           
           <YStack gap={8}>
             <Paragraph fontSize={13} fontWeight="600" color={C.text}>Monthly Limit (SAR)</Paragraph>
-            <Input keyboardType="numeric" value={monthly} onChangeText={setMonthly} size="$5" borderRadius={12} focusStyle={{ borderColor: C.primary }} />
+            <Input keyboardType="numeric" value={monthly} onChangeText={setMonthly} size="$5" borderRadius={8} focusStyle={{ borderColor: C.primary }} backgroundColor={C.white} borderColor={C.border} />
           </YStack>
 
-          <Button pressStyle={{ scale: 0.97, opacity: 0.8 }} marginTop={16} backgroundColor={C.primary} color="white" size="$5" borderRadius={14} onPress={handleSave}>
-            Save Changes
+          <Button pressStyle={{ scale: 0.97, opacity: 0.8 }} marginTop={8} backgroundColor={C.primary} color="white" size="$5" borderRadius={6} onPress={handleSave}>
+            Save Limits
           </Button>
+        </YStack>
+
+        <Paragraph fontSize={16} fontWeight="bold" color={C.text} marginBottom={12}>Recent Transactions</Paragraph>
+        <YStack gap={12}>
+          {childTx.length === 0 ? (
+            <Paragraph color={C.muted}>No recent transactions.</Paragraph>
+          ) : (
+            childTx.map(tx => (
+              <XStack key={tx.id} style={s.card} justifyContent="space-between" alignItems="center">
+                <XStack gap={12} alignItems="center" flex={1}>
+                  {getIcon(tx.icon)}
+                  <YStack flex={1}>
+                    <Paragraph fontSize={15} fontWeight="bold" color={C.text}>{tx.merchant}</Paragraph>
+                    <Paragraph fontSize={12} color={C.muted}>{tx.date}</Paragraph>
+                    {tx.status === 'blocked' && (
+                      <Paragraph fontSize={12} color={C.error} fontWeight="bold">Blocked</Paragraph>
+                    )}
+                  </YStack>
+                </XStack>
+                <Paragraph fontSize={15} fontWeight="bold"
+                  color={tx.amount > 0 ? C.success : tx.status === 'blocked' ? C.error : C.text}>
+                  {tx.amount > 0 ? '+' : ''}{Math.abs(tx.amount).toFixed(2)} SAR
+                </Paragraph>
+              </XStack>
+            ))
+          )}
         </YStack>
       </ScrollView>
     </SafeAreaView>
   )
 }
-const s = StyleSheet.create({ container: { flex: 1, backgroundColor: C.white } })
+const s = StyleSheet.create({ 
+  container: { flex: 1, backgroundColor: C.bg },
+  card: { backgroundColor: C.cardBg, borderRadius: 8, borderWidth: 1, borderColor: C.border, padding: 14 }
+})

@@ -29,16 +29,16 @@ export default function ParentRegister() {
             <YStack gap={8}>
               <Paragraph fontSize={14} fontWeight="600" color={C.text}>Mobile Number</Paragraph>
               <Input value={phone} onChangeText={setPhone} keyboardType="phone-pad" placeholder="+966 50 123 4567" size="$5"
-                borderRadius={12} borderColor={C.border} backgroundColor={C.white} focusStyle={{ borderColor: C.primary }} />
+                borderRadius={8} borderColor={C.border} backgroundColor={C.white} focusStyle={{ borderColor: C.primary }} />
             </YStack>
             <YStack gap={8}>
               <Paragraph fontSize={14} fontWeight="600" color={C.text}>Country</Paragraph>
               <Input placeholder="Saudi Arabia" size="$5" value="Saudi Arabia" disabled={true} opacity={0.7}
-                borderRadius={12} borderColor={C.border} backgroundColor={C.white} />
+                borderRadius={8} borderColor={C.border} backgroundColor={C.white} />
             </YStack>
           </YStack>
           
-          <Button pressStyle={{ scale: 0.97, opacity: 0.8 }} backgroundColor={C.primary} color="white" size="$5" borderRadius={14} onPress={handleNext}>
+          <Button pressStyle={{ scale: 0.97, opacity: 0.8 }} backgroundColor={C.primary} color="white" size="$5" borderRadius={6} onPress={handleNext}>
             Send OTP
           </Button>
         </ScrollView>

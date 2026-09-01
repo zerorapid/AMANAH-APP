@@ -1,12 +1,12 @@
 export const C = {
-  primary: '#000000',
-  primaryLight: '#F3F4F6',
-  primaryDark: '#000000',
+  primary: '#09090B', // Zinc 950
+  primaryLight: '#F4F4F5', // Zinc 100
+  primaryDark: '#09090B',
   white: '#FFFFFF',
-  bg: '#F8F8F8',
-  border: '#E8E8E8',
-  text: '#1A1A1A',
-  muted: '#6B7280',
+  bg: '#FFFFFF', // Pure white bg (Shadcn Light)
+  border: '#E4E4E7', // Zinc 200
+  text: '#09090B', // Zinc 950
+  muted: '#71717A', // Zinc 500
   success: '#16A34A',
   successBg: '#F0FDF4',
   error: '#DC2626',

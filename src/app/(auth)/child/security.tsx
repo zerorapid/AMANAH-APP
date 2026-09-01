@@ -17,12 +17,12 @@ export default function ChildSecurity() {
         <Paragraph fontSize={26} fontWeight="bold" color={C.text}>Set Your PIN</Paragraph>
         <Paragraph color={C.muted} fontSize={14}>Create a 4-digit PIN to secure your wallet.</Paragraph>
         <Input keyboardType="numeric" secureTextEntry maxLength={4}
-          placeholder="• • • •" size="$6" borderRadius={12} borderColor={C.border}
+          placeholder="• • • •" size="$6" borderRadius={8} borderColor={C.border}
           backgroundColor={C.white} textAlign="center" fontSize={28} letterSpacing={16} />
         <Input keyboardType="numeric" secureTextEntry maxLength={4}
-          placeholder="Confirm PIN" size="$6" borderRadius={12} borderColor={C.border}
+          placeholder="Confirm PIN" size="$6" borderRadius={8} borderColor={C.border}
           backgroundColor={C.white} textAlign="center" fontSize={28} letterSpacing={16} />
-        <Button pressStyle={{ scale: 0.97, opacity: 0.8 }} marginTop={8} backgroundColor={C.primary} color="white" size="$5" borderRadius={14}
+        <Button pressStyle={{ scale: 0.97, opacity: 0.8 }} marginTop={8} backgroundColor={C.primary} color="white" size="$5" borderRadius={6}
           onPress={() => router.replace('/(child)')}>
           Go to My Wallet
         </Button>

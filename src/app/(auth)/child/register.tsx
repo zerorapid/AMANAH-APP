@@ -29,11 +29,11 @@ export default function ChildRegister() {
             <YStack gap={8}>
               <Paragraph fontSize={14} fontWeight="600" color={C.text}>Mobile Number</Paragraph>
               <Input value={phone} onChangeText={setPhone} keyboardType="phone-pad" placeholder="+966 50 123 4567" size="$5"
-                borderRadius={12} borderColor={C.border} backgroundColor={C.white} focusStyle={{ borderColor: C.primary }} />
+                borderRadius={8} borderColor={C.border} backgroundColor={C.white} focusStyle={{ borderColor: C.primary }} />
             </YStack>
           </YStack>
           
-          <Button pressStyle={{ scale: 0.97, opacity: 0.8 }} backgroundColor={C.primary} color="white" size="$5" borderRadius={14} onPress={handleNext}>
+          <Button pressStyle={{ scale: 0.97, opacity: 0.8 }} backgroundColor={C.primary} color="white" size="$5" borderRadius={6} onPress={handleNext}>
             Continue
           </Button>
         </ScrollView>

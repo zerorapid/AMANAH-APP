@@ -58,5 +58,5 @@ export default function ChildActivity() {
 const s = StyleSheet.create({
   container: { flex: 1, backgroundColor: C.white },
   scroll: { padding: 16, paddingBottom: 40 },
-  card: { backgroundColor: C.white, borderRadius: 12, borderWidth: 1, borderColor: C.border, padding: 14 },
+  card: { backgroundColor: C.white, borderRadius: 8, borderWidth: 1, borderColor: C.border, padding: 14 },
 })

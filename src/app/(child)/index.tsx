@@ -61,10 +61,10 @@ export default function ChildWalletHome() {
 
         {/* Quick Actions */}
         <XStack gap={12} marginBottom={20}>
-          <Button pressStyle={{ scale: 0.97, opacity: 0.8 }} flex={1} icon={<QrCode size={16} />} backgroundColor={C.primary} color="white" fontWeight="bold" borderRadius={12} onPress={() => router.push('/(child)/scan')}>
+          <Button pressStyle={{ scale: 0.97, opacity: 0.8 }} flex={1} icon={<QrCode size={16} />} backgroundColor={C.primary} color="white" fontWeight="bold" borderRadius={8} onPress={() => router.push('/(child)/scan')}>
             Scan & Pay
           </Button>
-          <Button pressStyle={{ scale: 0.97, opacity: 0.8 }} onPress={() => router.push("/(child)/request" as any)} flex={1} icon={<Send size={16} />} backgroundColor={C.primaryLight} color={C.primary} fontWeight="bold" borderRadius={12}>
+          <Button pressStyle={{ scale: 0.97, opacity: 0.8 }} onPress={() => router.push("/(child)/request" as any)} flex={1} icon={<Send size={16} />} backgroundColor={C.primaryLight} color={C.primary} fontWeight="bold" borderRadius={8}>
             Request
           </Button>
         </XStack>
@@ -141,18 +141,18 @@ export default function ChildWalletHome() {
 const s = StyleSheet.create({
   container: { flex: 1, backgroundColor: C.white },
   scroll: { padding: 16, paddingBottom: 40 },
-  iconBtn: { backgroundColor: C.primaryLight, width: 40, height: 40, borderRadius: 20,
+  iconBtn: { backgroundColor: C.primaryLight, width: 40, height: 40, borderRadius: 10,
     justifyContent: 'center', alignItems: 'center' },
-  balanceCard: { backgroundColor: C.primary, borderRadius: 20, padding: 20, marginBottom: 20 },
+  balanceCard: { backgroundColor: C.primary, borderRadius: 10, padding: 20, marginBottom: 20 },
   balLabel: { color: 'rgba(255,255,255,0.8)', fontSize: 14 },
   balAmount: { color: 'white', fontSize: 40, fontWeight: 'bold', marginVertical: 4 },
   divider: { height: 1, backgroundColor: 'rgba(255,255,255,0.25)', marginVertical: 12 },
   balSub: { color: 'rgba(255,255,255,0.75)', fontSize: 12 },
   balVal: { color: 'white', fontWeight: 'bold', fontSize: 15 },
-  card: { backgroundColor: C.white, borderRadius: 14, borderWidth: 1, borderColor: C.border, padding: 16 },
+  card: { backgroundColor: C.white, borderRadius: 6, borderWidth: 1, borderColor: C.border, padding: 16 },
   progressBarBg: { height: 8, backgroundColor: C.primaryLight, borderRadius: 4, overflow: 'hidden' },
   progressBarFill: { height: '100%', borderRadius: 4 },
-  txRow: { backgroundColor: C.white, borderRadius: 12, borderWidth: 1,
+  txRow: { backgroundColor: C.white, borderRadius: 8, borderWidth: 1,
     borderColor: C.border, padding: 12, flexDirection: 'row', alignItems: 'center',
     justifyContent: 'space-between' },
 })

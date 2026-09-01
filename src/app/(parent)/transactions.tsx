@@ -1,11 +1,11 @@
-import { ScrollView, StyleSheet, View } from 'react-native'
+import { ScrollView, StyleSheet, View, TouchableOpacity } from 'react-native'
 import { YStack, XStack, Paragraph } from 'tamagui'
+import { useState } from 'react'
 import { SafeAreaView } from 'react-native-safe-area-context'
 import { C } from '../../constants/theme'
-import { useState } from 'react'
-import { TouchableOpacity } from 'react-native'
 import { useParentStore } from '../../store/parentStore'
-import { ShoppingCart, Wallet, Gamepad2, HelpCircle } from "lucide-react-native";
+import { ShoppingCart, Wallet, Gamepad2, HelpCircle } from "lucide-react-native"
+
 const getIcon = (name?: string) => {
   switch(name) {
     case "ShoppingCart": return <ShoppingCart size={24} color={C.text} />;
@@ -15,65 +15,63 @@ const getIcon = (name?: string) => {
   }
 };
 
-
-export default function ParentTransactions() {
+export default function Transactions() {
   const { transactions } = useParentStore()
   const [activeTab, setActiveTab] = useState('All')
-  const filtered = transactions.filter(t => activeTab === 'All' ? true : activeTab === 'Completed' ? t.status === 'completed' : t.status === 'blocked')
+  
+  const tabs = ['All', 'Completed', 'Blocked']
+  
+  const filteredTransactions = transactions.filter(tx => {
+    if (activeTab === 'All') return true;
+    return tx.status.toLowerCase() === activeTab.toLowerCase();
+  });
 
   return (
     <SafeAreaView style={s.container} edges={['top']}>
       <ScrollView contentContainerStyle={s.scroll} showsVerticalScrollIndicator={false}>
-        <Paragraph fontSize={20} fontWeight="bold" color={C.text} marginBottom={16}>
-          All Transactions
-        </Paragraph>
-
-        {/* Filter tabs */}
-        <XStack gap={8} marginBottom={16}>
-          {['All', 'Completed', 'Blocked'].map((tab) => (
-            <View key={tab} style={[s.tab, tab === 'All' && s.tabActive]}>
-              <Paragraph fontSize={13} fontWeight="600" color={tab === 'All' ? C.white : C.muted}>{tab}</Paragraph>
-            </View>
+        <Paragraph fontSize={20} fontWeight="bold" color={C.text} marginBottom={16}>Transactions</Paragraph>
+        
+        {/* Tabs */}
+        <XStack gap={10} marginBottom={20}>
+          {tabs.map((tab) => (
+            <TouchableOpacity key={tab} onPress={() => setActiveTab(tab)} activeOpacity={0.7}>
+              <View style={[s.tab, activeTab === tab && s.tabActive]}>
+                <Paragraph fontSize={14} fontWeight="600" color={activeTab === tab ? C.white : C.muted}>
+                  {tab}
+                </Paragraph>
+              </View>
+            </TouchableOpacity>
           ))}
         </XStack>
 
         <YStack gap={8}>
-          
-          {filtered.length === 0 && (
+          {filteredTransactions.length === 0 ? (
             <YStack padding={40} alignItems="center" gap={12} opacity={0.5}>
               <HelpCircle size={48} color={C.muted} />
-              <Paragraph color={C.muted}>No transactions found.</Paragraph>
+              <Paragraph color={C.muted}>No {activeTab.toLowerCase()} transactions found.</Paragraph>
             </YStack>
-          )}
-          {filtered.map((tx) => (
-            <View key={tx.id} style={s.card}>
-              <XStack justifyContent="space-between" alignItems="center">
-                <XStack gap={12} alignItems="center" flex={1}>
-                  {getIcon(tx.icon)}
-                  <YStack flex={1}>
-                    <Paragraph fontSize={15} fontWeight="bold" color={C.text}>{tx.merchant}</Paragraph>
-                    <Paragraph fontSize={12} color={C.muted}>
-                      {tx.childId ? (tx.childId === 'c1' ? 'Alex' : 'Sarah') : 'Parent'} · {tx.date}
-                    </Paragraph>
-                  </YStack>
-                </XStack>
-                <YStack alignItems="flex-end">
+          ) : (
+            filteredTransactions.map((tx) => (
+              <View key={tx.id} style={s.card}>
+                <XStack justifyContent="space-between" alignItems="center">
+                  <XStack gap={12} alignItems="center" flex={1}>
+                    {getIcon(tx.icon)}
+                    <YStack flex={1}>
+                      <Paragraph fontSize={15} fontWeight="bold" color={C.text}>{tx.merchant}</Paragraph>
+                      <Paragraph fontSize={12} color={C.muted}>{tx.date}</Paragraph>
+                      {tx.status === 'blocked' && (
+                        <Paragraph fontSize={12} color={C.error} fontWeight="bold">Blocked</Paragraph>
+                      )}
+                    </YStack>
+                  </XStack>
                   <Paragraph fontSize={15} fontWeight="bold"
-                    color={tx.amount > 0 ? C.success : C.text}>
-                    {tx.amount > 0 ? '+' : ''}${Math.abs(tx.amount).toFixed(2)} SAR
+                    color={tx.amount > 0 ? C.success : tx.status === 'blocked' ? C.error : C.text}>
+                    {tx.amount > 0 ? '+' : ''}{tx.amount < 0 ? '-' : ''}{Math.abs(tx.amount).toFixed(2)} SAR
                   </Paragraph>
-                  <View style={[s.badge,
-                    tx.status === 'blocked' ? s.badgeRed :
-                    tx.status === 'completed' ? s.badgeGreen : s.badgeGray]}>
-                    <Paragraph fontSize={10} fontWeight="bold"
-                      color={tx.status === 'blocked' ? C.error : tx.status === 'completed' ? C.success : C.muted}>
-                      {tx.status.toUpperCase()}
-                    </Paragraph>
-                  </View>
-                </YStack>
-              </XStack>
-            </View>
-          ))}
+                </XStack>
+              </View>
+            ))
+          )}
         </YStack>
       </ScrollView>
     </SafeAreaView>
@@ -81,13 +79,9 @@ export default function ParentTransactions() {
 }
 
 const s = StyleSheet.create({
-  container: { flex: 1, backgroundColor: C.white },
+  container: { flex: 1, backgroundColor: C.bg },
   scroll: { padding: 16, paddingBottom: 40 },
-  tab: { paddingHorizontal: 14, paddingVertical: 6, borderRadius: 20, backgroundColor: C.bg },
-  tabActive: { backgroundColor: C.primary },
-  card: { backgroundColor: C.white, borderRadius: 12, borderWidth: 1, borderColor: C.border, padding: 12 },
-  badge: { paddingHorizontal: 6, paddingVertical: 2, borderRadius: 6, marginTop: 2 },
-  badgeRed: { backgroundColor: C.errorBg },
-  badgeGreen: { backgroundColor: C.successBg },
-  badgeGray: { backgroundColor: C.bg },
+  card: { backgroundColor: C.cardBg, borderRadius: 8, borderWidth: 1, borderColor: C.border, padding: 14 },
+  tab: { paddingVertical: 8, paddingHorizontal: 16, borderRadius: 20, backgroundColor: C.primaryLight },
+  tabActive: { backgroundColor: C.primary }
 })

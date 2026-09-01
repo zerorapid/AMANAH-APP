@@ -23,7 +23,7 @@ export default function ParentPayments() {
           {items.map((item) => (
             <TouchableOpacity key={item.title} style={s.card} activeOpacity={0.7} onPress={() => { if (item.title === "Send Money") router.push("/(parent)/send" as any); else if (item.title === "Funding Sources") router.push("/(parent)/top-up" as any); else if (item.title === "Scan & Pay") router.push("/(parent)/scan" as any); }}>
               <XStack gap={14} alignItems="center">
-                <YStack backgroundColor={C.primaryLight} padding={12} borderRadius={12}>
+                <YStack backgroundColor={C.primaryLight} padding={12} borderRadius={8}>
                   {item.icon}
                 </YStack>
                 <YStack flex={1}>
@@ -58,5 +58,5 @@ export default function ParentPayments() {
 const s = StyleSheet.create({
   container: { flex: 1, backgroundColor: C.white },
   scroll: { padding: 16, paddingBottom: 40 },
-  card: { backgroundColor: C.white, borderRadius: 14, borderWidth: 1, borderColor: C.border, padding: 14 },
+  card: { backgroundColor: C.white, borderRadius: 6, borderWidth: 1, borderColor: C.border, padding: 14 },
 })

@@ -19,7 +19,7 @@ export default function ParentSecurity() {
         <Paragraph fontSize={26} fontWeight="bold" color={C.text}>Security Setup</Paragraph>
         <Paragraph color={C.muted} fontSize={14}>Create a PIN to protect your account.</Paragraph>
 
-        <YStack backgroundColor={C.primaryLight} borderRadius={16} padding={20} alignItems="center" gap={8}>
+        <YStack backgroundColor={C.primaryLight} borderRadius={8} padding={20} alignItems="center" gap={8}>
           <Shield color={C.primary} size={36} />
           <Paragraph color={C.primary} fontWeight="bold" fontSize={15}>Enter 4-Digit PIN</Paragraph>
         </YStack>
@@ -30,7 +30,7 @@ export default function ParentSecurity() {
           maxLength={4}
           placeholder="• • • •"
           size="$6"
-          borderRadius={12}
+          borderRadius={8}
           borderColor={C.border}
           backgroundColor={C.white}
           textAlign="center"
@@ -43,7 +43,7 @@ export default function ParentSecurity() {
           maxLength={4}
           placeholder="Confirm PIN"
           size="$6"
-          borderRadius={12}
+          borderRadius={8}
           borderColor={C.border}
           backgroundColor={C.white}
           textAlign="center"
@@ -51,14 +51,14 @@ export default function ParentSecurity() {
           letterSpacing={16}
         />
 
-        <XStack gap={12} alignItems="center" backgroundColor={C.successBg} borderRadius={12} padding={12}>
+        <XStack gap={12} alignItems="center" backgroundColor={C.successBg} borderRadius={8} padding={12}>
           <Lightbulb size={18} color={C.primary} />
           <Paragraph color={C.success} fontSize={13} flex={1}>
             Biometric authentication can be enabled after setup in Settings.
           </Paragraph>
         </XStack>
 
-        <Button pressStyle={{ scale: 0.97, opacity: 0.8 }} backgroundColor={C.primary} color="white" size="$5" borderRadius={14}
+        <Button pressStyle={{ scale: 0.97, opacity: 0.8 }} backgroundColor={C.primary} color="white" size="$5" borderRadius={6}
           onPress={() => router.replace('/(parent)')}>
           Complete Setup & Enter App
         </Button>

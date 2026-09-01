@@ -23,16 +23,16 @@ export default function RequestFunds() {
         <YStack gap={8}>
           <Paragraph fontSize={13} fontWeight="600" color={C.text}>Amount (SAR)</Paragraph>
           <Input keyboardType="numeric" placeholder="0.00" size="$6" fontSize={24} fontWeight="bold"
-            borderRadius={12} borderColor={C.border} backgroundColor={C.white} />
+            borderRadius={8} borderColor={C.border} backgroundColor={C.white} />
         </YStack>
 
         <YStack gap={8}>
           <Paragraph fontSize={13} fontWeight="600" color={C.text}>Reason / Merchant</Paragraph>
           <Input placeholder="e.g. School trip" size="$5"
-            borderRadius={12} borderColor={C.border} backgroundColor={C.white} />
+            borderRadius={8} borderColor={C.border} backgroundColor={C.white} />
         </YStack>
 
-        <Button pressStyle={{ scale: 0.97, opacity: 0.8 }} marginTop={16} backgroundColor={C.primary} color="white" size="$5" borderRadius={14}
+        <Button pressStyle={{ scale: 0.97, opacity: 0.8 }} marginTop={16} backgroundColor={C.primary} color="white" size="$5" borderRadius={6}
           icon={<Send size={18} />} onPress={() => { alert("Request sent successfully!"); router.back(); }}>
           Send Request to Parent
         </Button>

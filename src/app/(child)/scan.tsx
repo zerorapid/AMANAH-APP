@@ -27,7 +27,7 @@ export default function ScannerScreen() {
         </View>
 
         <View style={s.footer}>
-          <Button pressStyle={{ scale: 0.97, opacity: 0.8 }} backgroundColor={C.primary} color="white" size="$5" borderRadius={14} onPress={() => {
+          <Button pressStyle={{ scale: 0.97, opacity: 0.8 }} backgroundColor={C.primary} color="white" size="$5" borderRadius={6} onPress={() => {
             alert('Scan successful! Payment processing...');
             router.back();
           }}>
@@ -42,6 +42,6 @@ const s = StyleSheet.create({
   container: { flex: 1, backgroundColor: 'black' },
   header: { flexDirection: 'row', alignItems: 'center', paddingHorizontal: 16, paddingTop: 20, zIndex: 10 },
   cameraSim: { flex: 1, justifyContent: 'center', alignItems: 'center' },
-  frame: { width: 250, height: 250, borderWidth: 4, borderColor: C.primary, borderRadius: 24, justifyContent: 'center', alignItems: 'center', backgroundColor: 'rgba(255,255,255,0.1)' },
+  frame: { width: 250, height: 250, borderWidth: 4, borderColor: C.primary, borderRadius: 12, justifyContent: 'center', alignItems: 'center', backgroundColor: 'rgba(255,255,255,0.1)' },
   footer: { padding: 24, paddingBottom: 40, backgroundColor: 'black' }
 })

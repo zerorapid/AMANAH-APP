@@ -35,5 +35,5 @@ export default function GenSettings() {
 }
 const s = StyleSheet.create({ 
   container: { flex: 1, backgroundColor: C.bg },
-  card: { backgroundColor: C.white, borderRadius: 12, borderWidth: 1, borderColor: C.border, padding: 16 }
+  card: { backgroundColor: C.white, borderRadius: 8, borderWidth: 1, borderColor: C.border, padding: 16 }
 })

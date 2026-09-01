@@ -44,7 +44,7 @@ export default function ChildInvitation() {
                 textAlign="center"
                 fontSize={24}
                 fontWeight="bold"
-                borderRadius={12}
+                borderRadius={8}
                 borderColor={char ? C.primary : C.border}
                 backgroundColor={C.white}
                 focusStyle={{ borderColor: C.primary }}
@@ -52,7 +52,7 @@ export default function ChildInvitation() {
             ))}
           </XStack>
           
-          <Button pressStyle={{ scale: 0.97, opacity: 0.8 }} backgroundColor={C.primary} color="white" size="$5" borderRadius={14} onPress={handleNext}>
+          <Button pressStyle={{ scale: 0.97, opacity: 0.8 }} backgroundColor={C.primary} color="white" size="$5" borderRadius={6} onPress={handleNext}>
             Verify Code
           </Button>
         </ScrollView>
